@@ -12,6 +12,11 @@ function script:into-hashtable {
   return $table
 }
 
+function script:into-directory ($Path) {
+  if (Test-Path -PathType Leaf $Path) { return Split-Path $Path }
+  return $Path
+}
+
 $script:EnvironmentStack = New-Object Stack[HashTable]
 
 <#
@@ -56,7 +61,7 @@ function Get-EnvironmentVariable {
     $Scope = "Process"
   }
   $value = [Environment]::GetEnvironmentVariable($Name, $Scope)
-  if ($AsPath) { return $value.Split([IO.Path]::PathSeparator) }
+  if ($AsPath) { return $value.Split([Path]::PathSeparator) }
   return $value
 }
 
@@ -83,7 +88,7 @@ function Get-EnvironmentVariable {
     more contexts
 #>
 function Set-EnvironmentVariable {
-  [CmdletBinding(SupportsShouldProcess = $true)]
+  [CmdletBinding()]
   param(
     [Parameter(
       Mandatory=$true,
@@ -103,7 +108,10 @@ function Set-EnvironmentVariable {
     [Parameter(Mandatory=$false)]
     [Alias("Join")]
     [Switch]
-    $AsPath = $false
+    $AsPath = $false,
+    [Parameter(Mandatory=$false)]
+    [Switch]
+    $Unique = $false
   )
 
   if ((-not $IsWindows) -and ($Scope -ne "Process")) {
@@ -111,11 +119,12 @@ function Set-EnvironmentVariable {
     $Scope = "Process"
   }
 
-  Write-Verbose "Setting '$Name' to '$Value' in '$Scope'"
-  if ($PSCmdlet.ShouldProcess($Name, $Value)) {
-    if ($AsPath) { $Value = $Value | Join-String -Separator ([IO.Path]::PathSeparator) }
-    [Environment]::SetEnvironmentVariable($Name, $Value, $Scope)
+  if ($AsPath) {
+    $Value = $Value `
+           | Select-Object -Unique:$Unique `
+           | Join-String -Separator ([Path]::PathSeparator)
   }
+  [Environment]::SetEnvironmentVariable($Name, $Value, $Scope)
 }
 
 <#
@@ -146,19 +155,27 @@ function Update-EnvironmentVariable {
     $Prepend = $false,
     [Parameter(Mandatory=$false)]
     [Switch]
-    $Push = $false
+    $Push = $false,
+    [Parameter(Mandatory=$false)]
+    [Switch]
+    $Unique = $false
   )
   if ((-not $IsWindows) -and ($Scope -ne "Process")) {
     Write-Warning "`$Scope should only be 'Process' on non-Windows"
     $Scope = "Process"
   }
 
-  $current = Get-EnvironmentVariable -Name $Name -Scope $Scope
+  $current = Get-EnvironmentVariable -Name $Name -Scope $Scope -AsPath:$AsPath
   $values = [ArrayList]@($current)
-  if ($Prepend) { $values.Insert(0, $Value) } else { $values.Add($Value) }
+  if ($Prepend) { $values.Insert(0, $Value) } else { $values.Add($Value) | Out-Null }
   if ($Push) { Push-Environment }
 
-  Set-EnvironmentVariable -Name $Name -Value $values -Scope $Scope -AsPath:$AsPath | Out-Null
+  Set-EnvironmentVariable `
+    -Name $Name `
+    -Value $values `
+    -Scope $Scope `
+    -AsPath:$AsPath `
+    -Unique:$Unique
 }
 <#
   .SYNOPSIS
@@ -261,8 +278,8 @@ function Update-SystemPath {
   param(
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
-    [String[]]
-    $Paths,
+    [String]
+    $Path,
     [Parameter(Mandatory=$false)]
     [Switch]
     $Prepend = $false,
@@ -270,7 +287,13 @@ function Update-SystemPath {
     [Switch]
     $Push = $false
   )
-  Update-EnvironmentVariable -Name PATH -Value $Paths -Prepend:$Prepend -Push:$Push -AsPath
+  Update-EnvironmentVariable `
+    -Name PATH `
+    -Value (script:into-directory $Path) `
+    -Prepend:$Prepend `
+    -Push:$Push `
+    -Unique `
+    -AsPath
 }
 
 <# Helper to just update the powershell module path #>
@@ -279,8 +302,8 @@ function Update-PsPath {
   param(
     [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
-    [String[]]
-    $Paths,
+    [String]
+    $Path,
     [Parameter(Mandatory=$false)]
     [Switch]
     $Prepend = $false,
@@ -288,7 +311,13 @@ function Update-PsPath {
     [Switch]
     $Push = $false
   )
-  Update-EnvironmentVariable -Name PsModulePath -Value $Paths -Prepend:$Prepend -Push:$Push -AsPath
+  Update-EnvironmentVariable `
+    -Name PsModulePath `
+    -Value (script:into-directory $Path) `
+    -Prepend:$Prepend `
+    -Push:$Push `
+    -Unique `
+    -AsPath
 }
 
 Set-Alias Update-EnvVar Update-EnvironmentVariable
@@ -298,4 +327,3 @@ Set-Alias Set-EnvVar Set-EnvironmentVariable
 Set-Alias Import-Env Import-Environment
 Set-Alias Push-Env Push-Environment
 Set-Alias Pop-Env Pop-Environment
-

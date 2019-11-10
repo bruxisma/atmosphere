@@ -1,6 +1,6 @@
 @{
   RootModule = 'Atmosphere.psm1'
-  ModuleVersion = '0.1.0'
+  ModuleVersion = '0.1.1'
   CompatiblePSEditions = 'Core'
   GUID = 'c0cde49c-3bf7-4b20-84ec-c56a7a7d5969'
   Author = 'Isabella Muerte'
@@ -33,6 +33,12 @@
           Tags = @("Environment", "Utility", "EnvVars", "Linux", "Windows", "Mac")
           ProjectUri = 'https://github.com/slurps-mad-rips/atmosphere'
           ReleaseNotes = @'
+# 0.1.1
+
+🐛 Fix output showing up when updating an environment variable
+🐛 Fix inability to deduplicate environment variables
+✨ The path to a file can now be added. It's directory will be used instead.
+
 # 0.1.0
 
 Initial release!
