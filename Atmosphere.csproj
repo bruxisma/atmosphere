@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk"> <!--DefaultTargets="Deploy"-->
+  <PropertyGroup>
+    <Description>Environment Variable and Environment Path Manipulation</Description>
+    <!-- When SDK is 7.0.0, we can update this to netcoreapp 3.1 -->
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AssemblyName>Atmosphere</AssemblyName>
+    <Pwsh>pwsh</Pwsh>
+    <DeployDirectory>$([MSBuild]::EnsureTrailingSlash($([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', 'bin', '$(AssemblyName)'))))</DeployDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.PowerShell.SDK" Version="6.2.3">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PowerShellManifest Include="Atmosphere.psd1" />
+  </ItemGroup>
+  <Target Name="Deploy" DependsOnTargets="Build">
+    <Copy SourceFiles="@(PowerShellManifest)"
+      DestinationFolder="$(DeployDirectory)" />
+    <Copy SourceFiles="$(OutputPath)/$(AssemblyName).dll"
+      DestinationFolder="$(DeployDirectory)" />
+    <Message Text="Atmosphere.psd1 -> $(DeployDirectory)Atmosphere.psd1" Importance="High" />
+    <Message Text="Atmosphere.dll -> $(DeployDirectory)Atmosphere.dll" Importance="High" />
+  </Target>
+  <Target Name="Test" DependsOnTargets="Build">
+    <Message Text="Running Unit Tests: $(MSBuildBinPath)" />
+    <Exec Command="$(Pwsh) -NoProfile -NonInteractive -NoLogo $(MSBuildProjectDirectory)/tests/test.ps1"
+          WorkingDirectory="$(MSBuildProjectDirectory)/$(OutputPath)" />
+  </Target>
+</Project>
