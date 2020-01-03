@@ -15,4 +15,4 @@ jobs:
       with:
         dotnet-version: 3.0.100
     - name: Run Test
-      run: dotnet msbuild -t:Test -v:n
+      run: dotnet msbuild -r:True -t:Test -v:n
