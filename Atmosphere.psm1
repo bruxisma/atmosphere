@@ -232,24 +232,6 @@ function Import-Environment {
   }
 }
 
-function Push-Environment {
-  [CmdletBinding()]
-  param(
-    [Parameter(Mandatory=$false)]
-    [ValidateNotNullOrEmpty()]
-    [HashTable]
-    $State
-  )
-  $vars = @{}
-  if (-not $State) { $State = script:into-hashtable }
-  foreach ($entry in $State.GetEnumerator()) {
-    $current = Get-EnvironmentVariable $entry.Name
-    $vars.Add($entry.Name, $current)
-    Set-EnvironmentVariable $entry.Name $entry.Value
-  }
-  $script:EnvironmentStack.Push($vars)
-}
-
 <#
   .SYNOPSIS
     Reset the environment to the previous state that was pushed onto the

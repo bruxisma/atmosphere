@@ -7,6 +7,10 @@ using System;
 namespace Atmosphere {
   internal static class Extensions {
 
+    internal static bool IsNullOrEmpty (this Hashtable source) {
+      return source == null || source.Count == 0;
+    }
+
     internal static bool IsNullOrEmpty<T>(this IEnumerable<T> source) {
       return source == null || source.IsEmpty();
     }
@@ -24,6 +28,22 @@ namespace Atmosphere {
 
     internal static string FromPathList(this IEnumerable<DirectoryInfo> source) {
       return source.Join(Path.PathSeparator);
+    }
+
+    internal static Dictionary<string, string> IntoDictionary (this Hashtable source) {
+      var dict = new Dictionary<string, string>();
+      foreach (DictionaryEntry entry in source) {
+        dict.Add(entry.Key.ToString(), entry.Value.ToString());
+      }
+      return dict;
+    }
+
+    internal static Hashtable IntoHashtable (this Dictionary<string, string> source) {
+      var table = new Hashtable();
+      foreach (var entry in source) {
+        table.Add(entry.Key, entry.Value);
+      }
+      return table;
     }
 
     internal static List<DirectoryInfo> IntoPathList(this string source) {
