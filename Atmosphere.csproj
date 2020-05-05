@@ -1,25 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk"> <!--DefaultTargets="Deploy"-->
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>Environment Variable and Environment Path Manipulation</Description>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>Atmosphere</AssemblyName>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Pwsh>pwsh</Pwsh>
     <DeployDirectory>$(MSBuildProjectDirectory)\bin\$(AssemblyName)</DeployDirectory>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PowerShellManifest Include="Atmosphere.psd1" />
   </ItemGroup>
-  <Target Name="Deploy" DependsOnTargets="Build">
-    <Copy SourceFiles="@(PowerShellManifest)"
-      DestinationFolder="$(DeployDirectory)" />
-    <Copy SourceFiles="$(OutputPath)\$(AssemblyName).dll"
-      DestinationFolder="$(DeployDirectory)" />
-    <Message Text="Atmosphere.psd1 -> $(DeployDirectory)\Atmosphere.psd1" Importance="High" />
-    <Message Text="Atmosphere.dll -> $(DeployDirectory)\Atmosphere.dll" Importance="High" />
-  </Target>
+  <ItemGroup>
+    <Content Include="Atmosphere.psd1" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
   <Target Name="Test" DependsOnTargets="Build">
     <Message Text="Running Unit Tests: $(MSBuildBinPath)" />
     <Exec Command="$(Pwsh) -NoProfile -NonInteractive -NoLogo $(MSBuildProjectDirectory)/tests/test.ps1"

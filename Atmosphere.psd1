@@ -6,7 +6,7 @@
   Description = 'Cmdlets for working with environment variables and paths'
   ModuleVersion = '1.0.0'
   CompatiblePSEditions = 'Core'
-  PowerShellVersion = '6.2',
+  PowerShellVersion = '7.0',
   RootModule = 'Atmosphere.dll'
   CmdletsToExport = @(
     'Get-EnvironmentVariable',
