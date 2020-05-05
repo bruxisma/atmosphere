@@ -17,6 +17,6 @@ jobs:
       with:
         dotnet-version: 3.1.201
     - name: Build Project
-      run: dotnet build --nologo ${{ matrix.cfg }}
+      run: dotnet build --nologo --configuration ${{ matrix.cfg }}
     - name: Run Tests
       run: dotnet msbuild -t:Test -v:n
