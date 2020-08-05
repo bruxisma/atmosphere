@@ -1,0 +1,30 @@
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="GetArchiveEntries"
+             TaskFactory="RoslynCodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <Archive ParameterType="System.String" Required="true" />
+      <Entries ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Using Namespace="System.Collections.Generic" />
+      <Using Namespace="System.IO.Compression" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System" />
+      <Code Type="Fragment" Language="C#">
+        <![CDATA[
+          var entries = new List<TaskItem>();
+          Log.LogMessage($"Listing entries for {Archive}");
+          using (var archive = ZipFile.OpenRead(Archive)) {
+            foreach (var entry in archive.Entries) {
+              Log.LogMessage(MessageImportance.High, $"  {entry}");
+              entries.Add(new TaskItem(entry.FullName));
+            }
+          }
+          Entries = entries.ToArray();
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+</Project>

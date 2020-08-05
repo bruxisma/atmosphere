@@ -1,24 +1,43 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="Atmosphere.targets" />
+  <!-- Package Metadata -->
   <PropertyGroup>
-    <Description>Environment Variable and Environment Path Manipulation</Description>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>Atmosphere</AssemblyName>
+    <Authors>Isabella Muerte</Authors>
+    <Version>1.0.0-alpha</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Pwsh>pwsh</Pwsh>
-    <DeployDirectory>$(MSBuildProjectDirectory)\bin\$(AssemblyName)</DeployDirectory>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <PackageType>PowershellBinaryModule</PackageType>
+    <Description>Environment Variable and Environment Path Manipulation</Description>
+    <RepositoryUrl>https://github.com/slurps-mad-rips/atmosphere</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  <!-- Build Properties -->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <PackageOutputPath>$(MSBuildProjectDirectory)</PackageOutputPath>
+    <TargetsForTfmSpecificContentInPackage>PowershellManifest</TargetsForTfmSpecificContentInPackage>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NoWarn>NU5100;NU5128</NoWarn>
+  <!-- Custom Properties -->
+    <PackageFilename>$(AssemblyName).$(Version).nupkg</PackageFilename>
+    <Pwsh>pwsh -NoProfile -NonInteractive -NoLogo</Pwsh>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.0">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.0" PrivateAssets="All" />
+    <None Include="$(AssemblyName).ps?1" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Atmosphere.psd1" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
+  <Target Name="PowershellManifest">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)$(AssemblyName).dll" PackagePath="" />
+      <TfmSpecificPackageFile Include="$(AssemblyName).ps?1" PackagePath="" />
+    </ItemGroup>
+  </Target>
   <Target Name="Test" DependsOnTargets="Build">
     <Message Text="Running Unit Tests: $(MSBuildBinPath)" />
-    <Exec Command="$(Pwsh) -NoProfile -NonInteractive -NoLogo $(MSBuildProjectDirectory)/tests/test.ps1"
-          WorkingDirectory="$(MSBuildProjectDirectory)/$(OutputPath)" />
+    <Exec Command="$(Pwsh) $(MSBuildProjectDirectory)\tests\test.ps1"
+          WorkingDirectory="$(MSBuildProjectDirectory)\$(OutputPath)" />
+  </Target>
+  <Target Name="Inspect" DependsOnTargets="Pack">
+    <Message Text="Generating package to inspect contents" />
+    <GetArchiveEntries Archive="$(PackageFilename)"/>
   </Target>
 </Project>

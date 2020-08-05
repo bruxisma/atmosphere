@@ -1,4 +1,4 @@
-name: Unit Tests
+name: Build and Test
 
 on: [push]
 
@@ -19,4 +19,4 @@ jobs:
     - name: Build Project
       run: dotnet build --nologo --configuration ${{ matrix.cfg }}
     - name: Run Tests
-      run: dotnet msbuild -t:Test -v:n
+      run: dotnet build -t:test -v:n

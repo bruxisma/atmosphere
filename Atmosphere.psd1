@@ -6,19 +6,19 @@
   Description = 'Cmdlets for working with environment variables and paths'
   ModuleVersion = '1.0.0'
   CompatiblePSEditions = 'Core'
-  PowerShellVersion = '7.0',
+  PowerShellVersion = '7.0'
   RootModule = 'Atmosphere.dll'
   CmdletsToExport = @(
-    'Get-EnvironmentVariable',
-    'Get-EnvironmentPath',
-    'Get-LDLibraryPath',
-    'Get-PkgConfigPath',
-    'Get-PSModulePath',
-    'Get-PythonPath',
-    'Get-SystemPath',
-    'Import-Environment',
-    'Push-Environment',
-    'Pop-Environment',
+    'Get-EnvironmentVariable'
+    'Get-EnvironmentPath'
+    'Get-LDLibraryPath'
+    'Get-PkgConfigPath'
+    'Get-PSModulePath'
+    'Get-PythonPath'
+    'Get-SystemPath'
+    'Import-Environment'
+    'Push-Environment'
+    'Pop-Environment'
   )
   FunctionsToExport = @()
   VariablesToExport = @()

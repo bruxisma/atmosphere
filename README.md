@@ -4,7 +4,7 @@ Atmosphere is a Powershell Core module for pushing, popping, getting, setting,
 updating, and importing environment variables. It currently works on Windows,
 macOS, and Linux. It's released under the MIT License.
 
-![Unit Tests][]
+![Unit Tests][] ![Package][]
 
 # Installation
 
@@ -79,4 +79,5 @@ fish, and batch files), dotenv, JSON, PSD1 (powershell data file), XML, and
 more.
 
 [Powershell Gallery]: https://www.powershellgallery.com/
-[Unit Tests]: https://github.com/slurps-mad-rips/atmosphere/workflows/Unit%20Tests/badge.svg
+[Unit Tests]: https://github.com/slurps-mad-rips/atmosphere/workflows/Build%20and%20Test/badge.svg
+[Package]: https://github.com/slurps-mad-rips/atmosphere/workflows/Package/badge.svg
