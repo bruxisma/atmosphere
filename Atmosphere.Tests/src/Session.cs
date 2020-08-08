@@ -5,6 +5,7 @@ using Microsoft.PowerShell.Commands;
 
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Collections;
 using System;
 
 namespace Atmosphere.Tests {
@@ -25,6 +26,9 @@ namespace Atmosphere.Tests {
     public void Dispose () {
       this.runspace?.Dispose();
       this.Shell?.Dispose();
+      foreach (DictionaryEntry entry in System.Environment.GetEnvironmentVariables()) {
+        System.Environment.SetEnvironmentVariable(entry.Key as string, null);
+      }
     }
 
     internal Collection<PSObject> Invoke () {
