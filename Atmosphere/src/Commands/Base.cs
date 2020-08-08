@@ -14,6 +14,7 @@ namespace Atmosphere.Commands {
 
   public class ModifyCommand : ResultCommand {
     [Parameter(Position=1, Mandatory=true)]
+    [AllowEmptyString]
     [Alias("With")]
     public string Value { get; set; }
 

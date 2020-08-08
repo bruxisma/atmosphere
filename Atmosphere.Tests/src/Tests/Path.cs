@@ -3,24 +3,42 @@ using System;
 using Xunit;
 
 namespace Atmosphere.Tests {
-  public class GetEnvironmentPath : Test {
-    [Fact]
-    public void Empty() { }
-  }
+  //public class GetEnvironmentPath : Test {
+  //  [Fact]
+  //  public void Empty() { }
+  //}
 
-  public class GetLDLibraryPath : Test {
-    [Fact]
-    public void Empty() { }
-  }
+  //public class GetLDLibraryPath : Test {
+  //  [Fact]
+  //  public void Empty() { }
+  //}
 
-  public class GetPkgConfigPath : Test { }
-  public class GetPSModulePath : Test { }
-  public class GetPythonPath : Test { }
-  public class GetSystemPath : Test { }
+  //public class GetPkgConfigPath : Test {
+  //  [Fact] public void Empty() { }
+  //}
+  //public class GetPSModulePath : Test {
+  //  [Fact] public void Empty() { }
+  //}
+  //public class GetPythonPath : Test {
+  //  [Fact] public void Empty() { }
+  //}
+  //public class GetSystemPath : Test {
+  //  [Fact] public void Empty() { }
+  //}
 
-  public class UpdateLDLibraryPath : Test { }
-  public class UpdatePkgConfigPath : Test { }
-  public class UpdatePSModulePath : Test { }
-  public class UpdatePythonPath : Test { }
-  public class UpdateSystemPath : Test { }
+  //public class UpdateLDLibraryPath : Test {
+  //  [Fact] public void Empty() { }
+  //}
+  //public class UpdatePkgConfigPath : Test {
+  //  [Fact] public void Empty() { }
+  //}
+  //public class UpdatePSModulePath : Test {
+  //  [Fact] public void Empty() { }
+  //}
+  //public class UpdatePythonPath : Test {
+  //  [Fact] public void Empty() { }
+  //}
+  //public class UpdateSystemPath : Test {
+  //  [Fact] public void Empty() { }
+  //}
 }
