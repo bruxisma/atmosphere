@@ -27,11 +27,4 @@ namespace Atmosphere.Commands {
       }
     }
   }
-
-  [Cmdlet(VerbsData.Import, "ShellScript")]
-  public sealed class ImportShellScript : ImportCommand {
-    protected sealed override void Import () {
-    }
-  }
-
 }

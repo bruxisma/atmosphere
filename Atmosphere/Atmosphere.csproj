@@ -13,7 +13,7 @@
     <RepositoryType>git</RepositoryType>
   <!-- Build Properties -->
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <PackageOutputPath>$(MSBuildProjectDirectory)</PackageOutputPath>
+    <PackageOutputPath>$(SolutionDir)</PackageOutputPath>
     <TargetsForTfmSpecificContentInPackage>PowershellManifest</TargetsForTfmSpecificContentInPackage>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoWarn>NU5100;NU5128</NoWarn>
@@ -22,13 +22,13 @@
     <Pwsh>pwsh -NoProfile -NonInteractive -NoLogo</Pwsh>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.3" PrivateAssets="All" />
     <None Include="$(AssemblyName).ps?1" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <Target Name="PowershellManifest">
     <ItemGroup>
       <TfmSpecificPackageFile Include="$(OutputPath)$(AssemblyName).dll" PackagePath="" />
-      <TfmSpecificPackageFile Include="$(AssemblyName).ps?1" PackagePath="" />
+      <TfmSpecificPackageFile Include="$(SolutionDir)\$(AssemblyName).ps?1" PackagePath="" />
     </ItemGroup>
   </Target>
   <Target Name="Test" DependsOnTargets="Build">
@@ -37,7 +37,6 @@
           WorkingDirectory="$(MSBuildProjectDirectory)\$(OutputPath)" />
   </Target>
   <Target Name="Inspect" DependsOnTargets="Pack">
-    <Message Text="Generating package to inspect contents" />
     <GetArchiveEntries Archive="$(PackageFilename)"/>
   </Target>
 </Project>
