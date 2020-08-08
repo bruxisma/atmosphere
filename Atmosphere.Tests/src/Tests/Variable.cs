@@ -17,7 +17,9 @@ namespace Atmosphere.Tests {
 
     [Theory]
     [InlineData("ATMOSPHERE", "")]
-    public void Empty(string Name, string Value) {
+    [InlineData("ATMOSPHERE", "TEST")]
+    [InlineData("NON-STANDARD", "VALUE")]
+    public void BasicOperation(string Name, string Value) {
       this.session.Environment.Add(Name, Value);
       this.session.AddCommand("Get-EnvironmentVariable").AddParameter("Name", Name);
       var results = this.session.Invoke();
