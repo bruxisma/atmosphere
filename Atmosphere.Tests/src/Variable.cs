@@ -1,5 +1,3 @@
-using System.Management.Automation.Runspaces;
-using System.Management.Automation;
 using System;
 using Xunit;
 
