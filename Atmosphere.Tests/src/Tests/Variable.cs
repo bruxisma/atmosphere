@@ -43,15 +43,16 @@ namespace Atmosphere.Tests {
 
     [Theory]
     [InlineData("ATMOSPHERE", "")]
-
-    public void SetToEmptyString(string name, string value) {
+    [InlineData("ATMOSPHERE", "TEST")]
+    [InlineData("NON-STANDARD", "VALUE")]
+    public void BasicOperation(string name, string value) {
       this.session.Environment.Add("ATMOSPHERE", "TEST");
       this.session
         .AddCommand("Set-EnvironmentVariable")
         .AddParameter("Name", name)
         .AddParameter("Value", value)
         .AddStatement()
-        .AddScript("[System.Environment]::GetEnvironmentVariable('ATMOSPHERE')");
+        .AddScript($"[System.Environment]::GetEnvironmentVariable('{name}')");
       Assert.Equal(value, String.Join("", this.session.Invoke()));
     }
 

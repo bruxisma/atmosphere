@@ -28,15 +28,10 @@
   <Target Name="PowershellManifest">
     <ItemGroup>
       <TfmSpecificPackageFile Include="$(OutputPath)$(AssemblyName).dll" PackagePath="" />
-      <TfmSpecificPackageFile Include="$(SolutionDir)\$(AssemblyName).ps?1" PackagePath="" />
+      <TfmSpecificPackageFile Include="$(AssemblyName).ps?1" PackagePath="" />
     </ItemGroup>
   </Target>
-  <Target Name="Test" DependsOnTargets="Build">
-    <Message Text="Running Unit Tests: $(MSBuildBinPath)" />
-    <Exec Command="$(Pwsh) $(MSBuildProjectDirectory)\tests\test.ps1"
-          WorkingDirectory="$(MSBuildProjectDirectory)\$(OutputPath)" />
-  </Target>
   <Target Name="Inspect" DependsOnTargets="Pack">
-    <GetArchiveEntries Archive="$(PackageFilename)"/>
+    <GetArchiveEntries Archive="$(PackageOutputPath)\$(PackageFilename)"/>
   </Target>
 </Project>
