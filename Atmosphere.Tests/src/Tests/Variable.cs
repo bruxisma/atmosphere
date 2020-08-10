@@ -1,6 +1,9 @@
-using Atmosphere.Commands;
+using System.Management.Automation;
+using System;
 using Xunit.Abstractions;
 using Xunit;
+
+using Atmosphere.Commands;
 
 namespace Atmosphere.Tests {
   public class GetEnvironmentVariable : Test {
@@ -19,13 +22,10 @@ namespace Atmosphere.Tests {
     [InlineData("ATMOSPHERE", "")]
     [InlineData("ATMOSPHERE", "TEST")]
     [InlineData("NON-STANDARD", "VALUE")]
-    public void BasicOperation(string Name, string Value) {
-      this.session.Environment.Add(Name, Value);
-      this.session.AddCommand("Get-EnvironmentVariable").AddParameter("Name", Name);
-      var results = this.session.Invoke();
-      foreach (var result in results) {
-        Assert.Equal($"{result}", Value);
-      }
+    public void BasicOperation(string name, string value) {
+      this.session.Environment.Add(name, value);
+      this.session.AddCommand("Get-EnvironmentVariable").AddParameter("Name", name);
+      Assert.Equal(value, String.Join("", this.session.Invoke()));
     }
   }
 
@@ -43,18 +43,16 @@ namespace Atmosphere.Tests {
 
     [Theory]
     [InlineData("ATMOSPHERE", "")]
-    public void SetToEmptyString(string Name, string Value) {
+
+    public void SetToEmptyString(string name, string value) {
       this.session.Environment.Add("ATMOSPHERE", "TEST");
       this.session
         .AddCommand("Set-EnvironmentVariable")
-        .AddParameter("Name", Name)
-        .AddParameter("Value", Value)
+        .AddParameter("Name", name)
+        .AddParameter("Value", value)
         .AddStatement()
         .AddScript("[System.Environment]::GetEnvironmentVariable('ATMOSPHERE')");
-      var results = this.session.Invoke();
-      foreach (var result in results) {
-        Assert.Equal($"{result}", Value);
-      }
+      Assert.Equal(value, String.Join("", this.session.Invoke()));
     }
 
   }
