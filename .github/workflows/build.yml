@@ -7,6 +7,7 @@ jobs:
         cfg: [Release, Debug]
         os: [ubuntu-latest, macos-latest, windows-latest]
         version: ['3.1.x']
+      fail-fast: false
     runs-on: ${{ matrix.os }}
     env:
       DOTNET_NOLOGO: true
