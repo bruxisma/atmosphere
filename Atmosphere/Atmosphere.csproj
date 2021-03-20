@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <!-- Contains Custom Actions -->
   <Import Project="Atmosphere.targets" />
   <!-- Package Metadata -->
   <PropertyGroup>
@@ -29,6 +30,7 @@
     <ItemGroup>
       <TfmSpecificPackageFile Include="$(OutputPath)$(AssemblyName).dll" PackagePath="" />
       <TfmSpecificPackageFile Include="$(AssemblyName).ps?1" PackagePath="" />
+      <TfmSpecificPackageFile Include="$(AssemblyName).dll-Help.xml" PackagePath="en-US" />
     </ItemGroup>
   </Target>
   <Target Name="Inspect" DependsOnTargets="Pack">

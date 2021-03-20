@@ -8,14 +8,21 @@
   CompatiblePSEditions = 'Core'
   PowerShellVersion = '7.0'
   RootModule = 'Atmosphere.dll'
+
   CmdletsToExport = @(
     'Get-EnvironmentVariable'
+    'Set-EnvironmentVariable'
     'Get-EnvironmentPath'
     'Get-LDLibraryPath'
     'Get-PkgConfigPath'
     'Get-PSModulePath'
     'Get-PythonPath'
     'Get-SystemPath'
+    'Update-LDLibraryPath'
+    'Update-PkgConfigPath'
+    'Update-PSModulePath'
+    'Update-PythonPath'
+    'Update-SystemPath'
     'Import-Environment'
     'Push-Environment'
     'Pop-Environment'
@@ -27,6 +34,7 @@
     PSData = @{
       Tags = @("Environment", "Utility", "EnvVars", "Linux", "Windows", "Mac")
       ProjectUri = 'https://github.com/slurps-mad-rips/atmosphere'
+      Prerelease = 'Alpha'
       ReleaseNotes = @'
 # 1.0.0-Alpha
 
