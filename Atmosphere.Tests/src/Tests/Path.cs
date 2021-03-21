@@ -15,7 +15,7 @@ namespace Atmosphere.Tests {
       this(output, variable)
     { this.Command = command; }
     public PathTest(ITestOutputHelper output, string variable) :
-      base(output)
+      this(output)
     { this.Variable = variable; }
     public PathTest(ITestOutputHelper output) : base(output) { }
 
@@ -51,30 +51,18 @@ namespace Atmosphere.Tests {
     }
   }
 
-  /* TODO: Use the ListData/ a class instance instead of EnvironmentPathData */
-  public class GetEnvironmentPath : Test {
-
-    public GetEnvironmentPath(ITestOutputHelper output) : base(output) { }
+  public class GetEnvironmentPath : PathTest {
+    public GetEnvironmentPath(ITestOutputHelper output) :
+      base(output, "ATMOSPHERE", "Get-EnvironmentPath")
+    { }
 
     [Theory]
-    [MemberData(nameof(Paths))]
-    public void BasicOperation(string name, params string[] paths) {
-      Session.Environment.Add(name, String.Join(Path.PathSeparator, paths));
-      Session.AddCommand("Get-EnvironmentPath").AddParameter("Name", name);
-      var result = Session.Invoke();
-      for (int idx = 0; idx < result.Count; idx++) {
-          Assert.IsType<DirectoryInfo>(result[idx].BaseObject);
-          var item = result[idx].BaseObject as DirectoryInfo;
-          var path = paths[idx];
-          Assert.Equal(item.Name, path);
-      }
+    [MemberData(nameof(PathTest.Names))]
+    public void BasicOperation(params string[] paths) {
+      Setup(paths);
+      Session.AddParameter("Name", Variable);
+      Invoke(paths);
     }
-
-    public static EnvironmentPathData Paths => new EnvironmentPathData {
-      { "ATMOSPHERE", "1", "2" },
-      { "ATMOSPHERE", "2", "3" },
-      { "ATMOSPHERE", "4" },
-    };
   }
 
   public class GetLDLibraryPath : PathTest {
@@ -85,8 +73,8 @@ namespace Atmosphere.Tests {
     [Theory]
     [MemberData(nameof(PathTest.Names))]
     public void BasicOperation(params string[] paths) {
-      base.Setup(paths);
-      base.Invoke(paths);
+      Setup(paths);
+      Invoke(paths);
     }
 
   }
@@ -99,8 +87,8 @@ namespace Atmosphere.Tests {
     [Theory]
     [MemberData(nameof(PathTest.Names))]
     public void BasicOperation(params string[] paths) {
-      base.Setup(paths);
-      base.Invoke(paths);
+      Setup(paths);
+      Invoke(paths);
     }
   }
 
@@ -112,8 +100,8 @@ namespace Atmosphere.Tests {
     [Theory]
     [MemberData(nameof(PathTest.Names))]
     public void BasicOperation(params string[] paths) {
-      base.Setup(paths);
-      base.Invoke(paths);
+      Setup(paths);
+      Invoke(paths);
     }
   }
 
@@ -125,8 +113,8 @@ namespace Atmosphere.Tests {
     [Theory]
     [MemberData(nameof(PathTest.Names))]
     public void BasicOperation(params string[] paths) {
-      base.Setup(paths);
-      base.Invoke(paths);
+      Setup(paths);
+      Invoke(paths);
     }
   }
 
@@ -138,8 +126,8 @@ namespace Atmosphere.Tests {
     [Theory]
     [MemberData(nameof(PathTest.Names))]
     public void BasicOperation(params string[] paths) {
-      base.Setup(paths);
-      base.Invoke(paths);
+      Setup(paths);
+      Invoke(paths);
     }
   }
 
