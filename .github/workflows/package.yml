@@ -27,4 +27,4 @@ jobs:
       - name: Build Project
         run: dotnet build --configuration ${{ matrix.cfg }}
       - name: Create Package
-        run: dotnet pack -p:RepositoryCommit=${{ github.sha }}
+        run: dotnet pack --configuration ${{ matrix.cfg }} --version-suffix ${{ github.sha }}

@@ -11,7 +11,7 @@ namespace Atmosphere.Commands {
   [OutputType(typeof(List<DirectoryInfo>))]
   public class GetEnvironmentPath : ResultCommand {
     sealed protected override void ProcessRecord() {
-      WriteObject(Environment.Current[Name].IntoPathList());
+      WriteObject(Environment.Current[Name].IntoPathList(), true);
     }
   }
 

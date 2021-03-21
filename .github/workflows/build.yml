@@ -27,4 +27,4 @@ jobs:
     - name: Build Project
       run: dotnet build --configuration ${{ matrix.cfg }}
     - name: Run Tests
-      run: dotnet test --configuration ${{ matrix.cfg }}
+      run: dotnet test --configuration ${{ matrix.cfg }} --collect:"XPlat Code Coverage"
