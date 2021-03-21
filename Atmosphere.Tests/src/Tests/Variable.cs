@@ -7,53 +7,37 @@ using Atmosphere.Commands;
 
 namespace Atmosphere.Tests {
   public class GetEnvironmentVariable : Test {
-    private readonly ITestOutputHelper output;
-    private readonly Session session;
 
-    public GetEnvironmentVariable(ITestOutputHelper output) {
-      this.output = output;
-      this.session = new Session(this);
-    }
-
-    public void Dispose () { this.session.Dispose(); }
-    public ITestOutputHelper Output { get => this.output; }
+    public GetEnvironmentVariable(ITestOutputHelper output) : base(output) { }
 
     [Theory]
     [InlineData("ATMOSPHERE", "")]
     [InlineData("ATMOSPHERE", "TEST")]
     [InlineData("NON-STANDARD", "VALUE")]
     public void BasicOperation(string name, string value) {
-      this.session.Environment.Add(name, value);
-      this.session.AddCommand("Get-EnvironmentVariable").AddParameter("Name", name);
-      Assert.Equal(value, String.Join("", this.session.Invoke()));
+      Session.Environment.Add(name, value);
+      Session.AddCommand("Get-EnvironmentVariable").AddParameter("Name", name);
+      Assert.Equal(value, String.Join("", Session.Invoke()));
     }
   }
 
   public class SetEnvironmentVariable : Test {
-    private readonly ITestOutputHelper output;
-    private readonly Session session;
 
-    public SetEnvironmentVariable(ITestOutputHelper output) {
-      this.output = output;
-      this.session = new Session(this);
-    }
-
-    public void Dispose () { this.session.Dispose(); }
-    public ITestOutputHelper Output { get => this.output; }
+    public SetEnvironmentVariable(ITestOutputHelper output) : base(output) { }
 
     [Theory]
     [InlineData("ATMOSPHERE", "")]
     [InlineData("ATMOSPHERE", "TEST")]
     [InlineData("NON-STANDARD", "VALUE")]
     public void BasicOperation(string name, string value) {
-      this.session.Environment.Add("ATMOSPHERE", "TEST");
-      this.session
+      Session.Environment.Add("ATMOSPHERE", "TEST");
+      Session
         .AddCommand("Set-EnvironmentVariable")
         .AddParameter("Name", name)
         .AddParameter("Value", value)
         .AddStatement()
         .AddScript($"[System.Environment]::GetEnvironmentVariable('{name}')");
-      Assert.Equal(value, String.Join("", this.session.Invoke()));
+      Assert.Equal(value, String.Join("", Session.Invoke()));
     }
 
   }

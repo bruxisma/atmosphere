@@ -8,6 +8,7 @@
       "type": "process",
       "args": [
         "build",
+        "--nologo",
         "${workspaceFolder}",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
@@ -24,6 +25,7 @@
       "type": "process",
       "args": [
         "test",
+        "--nologo",
         "${workspaceFolder}",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"

@@ -48,7 +48,7 @@ namespace Atmosphere.Commands {
     private string name;
 
     sealed protected override void ProcessRecord () {
-      WriteObject(Environment.Current[name].IntoPathList());
+      WriteObject(Environment.Current[name].IntoPathList(), true);
     }
   }
 

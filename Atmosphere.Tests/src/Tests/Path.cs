@@ -1,14 +1,49 @@
-using System.Management.Automation;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System;
 
 using Xunit.Abstractions;
 using Xunit;
 
-using Atmosphere.Commands;
-
 namespace Atmosphere.Tests {
+
+  // TODO: Move this into its own file (Alongside class Test)
+  public class PathTest : Test {
+
+    public PathTest(ITestOutputHelper output, string variable, string command) :
+      this(output, variable)
+    { this.Command = command; }
+    public PathTest(ITestOutputHelper output, string variable) :
+      base(output)
+    { this.Variable = variable; }
+    public PathTest(ITestOutputHelper output) : base(output) { }
+
+    public static TheoryData<string[]> Names => new TheoryData<string[]> {
+      new string[]{ "1", "2" },
+      new string[]{ "3", "4" },
+      new string[]{ "5" }
+    };
+
+    protected void Setup(string[] paths) {
+      Session.Environment.Add(this.Variable, String.Join(Path.PathSeparator, paths));
+      Session.AddCommand(this.Command);
+    }
+    protected void Invoke(string[] paths) {
+      var result = Session.Invoke().Select((item) => {
+        Assert.IsType<DirectoryInfo>(item.BaseObject);
+        return item.BaseObject as DirectoryInfo;
+      }).ToList();
+      for (int idx = 0; idx < result.Count; idx++) {
+        Assert.Equal(result[idx].Name, paths[idx]);
+      }
+    }
+
+    ///<summary>Environment Variable to read from</summary>
+    public string Variable { get; protected set; }
+    ///<summary>Name of command to add</summary>
+    public string Command { get; protected set; }
+  }
 
   public class EnvironmentPathData : TheoryData {
     public void Add (string key, params string[] paths) {
@@ -16,28 +51,21 @@ namespace Atmosphere.Tests {
     }
   }
 
+  /* TODO: Use the ListData/ a class instance instead of EnvironmentPathData */
   public class GetEnvironmentPath : Test {
-    private readonly ITestOutputHelper output;
-    private readonly Session session;
 
-    public GetEnvironmentPath (ITestOutputHelper output) {
-      this.output = output;
-      this.session = new Session(this);
-    }
-
-    public void Dispose () { this.session.Dispose(); }
-    public ITestOutputHelper Output { get => this.output; }
+    public GetEnvironmentPath(ITestOutputHelper output) : base(output) { }
 
     [Theory]
     [MemberData(nameof(Paths))]
     public void BasicOperation(string name, params string[] paths) {
-      this.session.Environment.Add(name, String.Join(Path.PathSeparator, paths));
-      this.session.AddCommand("Get-EnvironmentPath").AddParameter("Name", name);
-      var result = this.session.Invoke();
+      Session.Environment.Add(name, String.Join(Path.PathSeparator, paths));
+      Session.AddCommand("Get-EnvironmentPath").AddParameter("Name", name);
+      var result = Session.Invoke();
       for (int idx = 0; idx < result.Count; idx++) {
           Assert.IsType<DirectoryInfo>(result[idx].BaseObject);
           var item = result[idx].BaseObject as DirectoryInfo;
-          var path = paths[idx] as string;
+          var path = paths[idx];
           Assert.Equal(item.Name, path);
       }
     }
@@ -49,23 +77,71 @@ namespace Atmosphere.Tests {
     };
   }
 
-  //public class GetLDLibraryPath : Test {
-  //  [Fact]
-  //  public void Empty() { }
-  //}
+  public class GetLDLibraryPath : PathTest {
+    public GetLDLibraryPath(ITestOutputHelper output) :
+      base(output, "LD_LIBRARY_PATH", "Get-LDLibraryPath")
+    { }
 
-  //public class GetPkgConfigPath : Test {
-  //  [Fact] public void Empty() { }
-  //}
-  //public class GetPSModulePath : Test {
-  //  [Fact] public void Empty() { }
-  //}
-  //public class GetPythonPath : Test {
-  //  [Fact] public void Empty() { }
-  //}
-  //public class GetSystemPath : Test {
-  //  [Fact] public void Empty() { }
-  //}
+    [Theory]
+    [MemberData(nameof(PathTest.Names))]
+    public void BasicOperation(params string[] paths) {
+      base.Setup(paths);
+      base.Invoke(paths);
+    }
+
+  }
+
+  public class GetPkgConfigPath : PathTest {
+    public GetPkgConfigPath(ITestOutputHelper output) :
+      base(output, "PKG_CONFIG_PATH", "Get-PkgConfigPath")
+    { }
+
+    [Theory]
+    [MemberData(nameof(PathTest.Names))]
+    public void BasicOperation(params string[] paths) {
+      base.Setup(paths);
+      base.Invoke(paths);
+    }
+  }
+
+  public class GetPSModulePath : PathTest {
+    public GetPSModulePath(ITestOutputHelper output) :
+      base(output, "PSModulePath", "Get-PSModulePath")
+    { }
+
+    [Theory]
+    [MemberData(nameof(PathTest.Names))]
+    public void BasicOperation(params string[] paths) {
+      base.Setup(paths);
+      base.Invoke(paths);
+    }
+  }
+
+  public class GetPythonPath : PathTest {
+    public GetPythonPath(ITestOutputHelper output) :
+      base(output, "PYTHON_PATH", "Get-PythonPath")
+    { }
+
+    [Theory]
+    [MemberData(nameof(PathTest.Names))]
+    public void BasicOperation(params string[] paths) {
+      base.Setup(paths);
+      base.Invoke(paths);
+    }
+  }
+
+  public class GetSystemPath : PathTest {
+    public GetSystemPath(ITestOutputHelper output) :
+      base(output, "PATH", "Get-SystemPath")
+    { }
+
+    [Theory]
+    [MemberData(nameof(PathTest.Names))]
+    public void BasicOperation(params string[] paths) {
+      base.Setup(paths);
+      base.Invoke(paths);
+    }
+  }
 
   //public class UpdateLDLibraryPath : Test {
   //  [Fact] public void Empty() { }
