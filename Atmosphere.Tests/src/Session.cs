@@ -16,12 +16,12 @@ namespace Atmosphere.Tests {
     private readonly ITestOutputHelper output;
     private readonly Session session;
 
-    protected Test(ITestOutputHelper output) {
+    protected Test (ITestOutputHelper output) {
       this.output = output;
       this.session = new Session(this);
     }
 
-    public void Dispose() { this.session.Dispose(); }
+    public void Dispose () { this.session.Dispose(); }
     public ITestOutputHelper Output { get => this.output; }
     public Session Session { get => this.session; }
   }
@@ -62,17 +62,17 @@ namespace Atmosphere.Tests {
       return this.Shell.Invoke();
     }
 
-    internal PowerShell AddParameter(string flag, object parameter) {
+    internal PowerShell AddParameter (string flag, object parameter) {
       return this.Shell.AddParameter(flag, parameter);
     }
-    internal PowerShell AddParameter(string flag) {
+    internal PowerShell AddParameter (string flag) {
       return this.Shell.AddParameter(flag);
     }
-    internal PowerShell AddCommand(string command) { return this.Shell.AddCommand(command); }
-    internal PowerShell AddStatement() { return this.Shell.AddStatement(); }
-    internal PowerShell AddScript(string script) { return this.Shell.AddScript(script); }
+    internal PowerShell AddCommand (string command) { return this.Shell.AddCommand(command); }
+    internal PowerShell AddStatement () { return this.Shell.AddStatement(); }
+    internal PowerShell AddScript (string script) { return this.Shell.AddScript(script); }
 
-    internal void RegisterCommand(Test test) {
+    internal void RegisterCommand (Test test) {
       var type = Type.GetType($"Atmosphere.Commands.{test.GetType().Name},Atmosphere");
       var attribute = Attribute.GetCustomAttribute(type, typeof(CmdletAttribute)) as CmdletAttribute;
       if (attribute == null) {

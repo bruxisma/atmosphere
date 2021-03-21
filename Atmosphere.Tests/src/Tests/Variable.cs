@@ -3,18 +3,16 @@ using System;
 using Xunit.Abstractions;
 using Xunit;
 
-using Atmosphere.Commands;
-
 namespace Atmosphere.Tests {
   public class GetEnvironmentVariable : Test {
 
-    public GetEnvironmentVariable(ITestOutputHelper output) : base(output) { }
+    public GetEnvironmentVariable (ITestOutputHelper output) : base(output) { }
 
     [Theory]
     [InlineData("ATMOSPHERE", "")]
     [InlineData("ATMOSPHERE", "TEST")]
     [InlineData("NON-STANDARD", "VALUE")]
-    public void BasicOperation(string name, string value) {
+    public void BasicOperation (string name, string value) {
       Session.Environment.Add(name, value);
       Session.AddCommand("Get-EnvironmentVariable").AddParameter("Name", name);
       Assert.Equal(value, String.Join("", Session.Invoke()));
@@ -23,13 +21,13 @@ namespace Atmosphere.Tests {
 
   public class SetEnvironmentVariable : Test {
 
-    public SetEnvironmentVariable(ITestOutputHelper output) : base(output) { }
+    public SetEnvironmentVariable (ITestOutputHelper output) : base(output) { }
 
     [Theory]
     [InlineData("ATMOSPHERE", "")]
     [InlineData("ATMOSPHERE", "TEST")]
     [InlineData("NON-STANDARD", "VALUE")]
-    public void BasicOperation(string name, string value) {
+    public void BasicOperation (string name, string value) {
       Session.Environment.Add("ATMOSPHERE", "TEST");
       Session
         .AddCommand("Set-EnvironmentVariable")

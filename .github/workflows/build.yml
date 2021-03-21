@@ -24,6 +24,8 @@ jobs:
       run: dotnet nuget locals all --clear
     - name: Install Dependencies
       run: dotnet restore
+    - name: Check Formatting
+      run: dotnet format --check
     - name: Build Project
       run: dotnet build --configuration ${{ matrix.cfg }}
     - name: Run Tests

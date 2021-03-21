@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System;
@@ -11,13 +10,11 @@ namespace Atmosphere.Tests {
   // TODO: Move this into its own file (Alongside class Test)
   public class PathTest : Test {
 
-    public PathTest(ITestOutputHelper output, string variable, string command) :
-      this(output, variable)
-    { this.Command = command; }
-    public PathTest(ITestOutputHelper output, string variable) :
-      this(output)
-    { this.Variable = variable; }
-    public PathTest(ITestOutputHelper output) : base(output) { }
+    public PathTest (ITestOutputHelper output, string variable, string command) :
+      this(output, variable) { this.Command = command; }
+    public PathTest (ITestOutputHelper output, string variable) :
+      this(output) { this.Variable = variable; }
+    public PathTest (ITestOutputHelper output) : base(output) { }
 
     public static TheoryData<string[]> Names => new TheoryData<string[]> {
       new string[]{ "1", "2" },
@@ -25,11 +22,11 @@ namespace Atmosphere.Tests {
       new string[]{ "5" }
     };
 
-    protected void Setup(string[] paths) {
+    protected void Setup (string[] paths) {
       Session.Environment.Add(this.Variable, String.Join(Path.PathSeparator, paths));
       Session.AddCommand(this.Command);
     }
-    protected void Invoke(string[] paths) {
+    protected void Invoke (string[] paths) {
       var result = Session.Invoke().Select((item) => {
         Assert.IsType<DirectoryInfo>(item.BaseObject);
         return item.BaseObject as DirectoryInfo;
@@ -52,13 +49,12 @@ namespace Atmosphere.Tests {
   }
 
   public class GetEnvironmentPath : PathTest {
-    public GetEnvironmentPath(ITestOutputHelper output) :
-      base(output, "ATMOSPHERE", "Get-EnvironmentPath")
-    { }
+    public GetEnvironmentPath (ITestOutputHelper output) :
+      base(output, "ATMOSPHERE", "Get-EnvironmentPath") { }
 
     [Theory]
     [MemberData(nameof(PathTest.Names))]
-    public void BasicOperation(params string[] paths) {
+    public void BasicOperation (params string[] paths) {
       Setup(paths);
       Session.AddParameter("Name", Variable);
       Invoke(paths);
@@ -66,66 +62,60 @@ namespace Atmosphere.Tests {
   }
 
   public class GetLDLibraryPath : PathTest {
-    public GetLDLibraryPath(ITestOutputHelper output) :
-      base(output, "LD_LIBRARY_PATH", "Get-LDLibraryPath")
-    { }
+    public GetLDLibraryPath (ITestOutputHelper output) :
+      base(output, "LD_LIBRARY_PATH", "Get-LDLibraryPath") { }
 
     [Theory]
     [MemberData(nameof(PathTest.Names))]
-    public void BasicOperation(params string[] paths) {
+    public void BasicOperation (params string[] paths) {
       Setup(paths);
       Invoke(paths);
     }
-
   }
 
   public class GetPkgConfigPath : PathTest {
-    public GetPkgConfigPath(ITestOutputHelper output) :
-      base(output, "PKG_CONFIG_PATH", "Get-PkgConfigPath")
-    { }
+    public GetPkgConfigPath (ITestOutputHelper output) :
+      base(output, "PKG_CONFIG_PATH", "Get-PkgConfigPath") { }
 
     [Theory]
     [MemberData(nameof(PathTest.Names))]
-    public void BasicOperation(params string[] paths) {
+    public void BasicOperation (params string[] paths) {
       Setup(paths);
       Invoke(paths);
     }
   }
 
   public class GetPSModulePath : PathTest {
-    public GetPSModulePath(ITestOutputHelper output) :
-      base(output, "PSModulePath", "Get-PSModulePath")
-    { }
+    public GetPSModulePath (ITestOutputHelper output) :
+      base(output, "PSModulePath", "Get-PSModulePath") { }
 
     [Theory]
     [MemberData(nameof(PathTest.Names))]
-    public void BasicOperation(params string[] paths) {
+    public void BasicOperation (params string[] paths) {
       Setup(paths);
       Invoke(paths);
     }
   }
 
   public class GetPythonPath : PathTest {
-    public GetPythonPath(ITestOutputHelper output) :
-      base(output, "PYTHON_PATH", "Get-PythonPath")
-    { }
+    public GetPythonPath (ITestOutputHelper output) :
+      base(output, "PYTHON_PATH", "Get-PythonPath") { }
 
     [Theory]
     [MemberData(nameof(PathTest.Names))]
-    public void BasicOperation(params string[] paths) {
+    public void BasicOperation (params string[] paths) {
       Setup(paths);
       Invoke(paths);
     }
   }
 
   public class GetSystemPath : PathTest {
-    public GetSystemPath(ITestOutputHelper output) :
-      base(output, "PATH", "Get-SystemPath")
-    { }
+    public GetSystemPath (ITestOutputHelper output) :
+      base(output, "PATH", "Get-SystemPath") { }
 
     [Theory]
     [MemberData(nameof(PathTest.Names))]
-    public void BasicOperation(params string[] paths) {
+    public void BasicOperation (params string[] paths) {
       Setup(paths);
       Invoke(paths);
     }

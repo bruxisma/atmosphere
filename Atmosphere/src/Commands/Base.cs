@@ -7,29 +7,29 @@ using System;
 namespace Atmosphere.Commands {
 
   public class ResultCommand : PSCmdlet {
-    [Parameter(Position=0, Mandatory=true, ValueFromPipeline=true)]
+    [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true)]
     [ValidateNotNullOrEmpty()]
     public string Name { get; set; }
   }
 
   public class ModifyCommand : ResultCommand {
-    [Parameter(Position=1, Mandatory=true)]
+    [Parameter(Position = 1, Mandatory = true)]
     [AllowEmptyString]
     [Alias("With")]
     public string Value { get; set; }
 
-    sealed protected override void BeginProcessing() { Value = Value ?? ""; }
+    sealed protected override void BeginProcessing () { Value = Value ?? ""; }
   }
 
   public class ImportCommand : PSCmdlet {
-    [Parameter(Position=0, Mandatory=true, ValueFromPipeline=true)]
+    [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true)]
     [ValidateNotNullOrEmpty()]
     public FileInfo Path { get; set; }
 
     [Parameter()]
     public SwitchParameter Overwrite { get; set; } = false;
 
-    sealed protected override void BeginProcessing() {
+    sealed protected override void BeginProcessing () {
       if (Path.Exists) { return; }
       throw new ArgumentException("Path", $"'{Path}' does not exist");
     }
@@ -56,7 +56,7 @@ namespace Atmosphere.Commands {
     protected ModifyPathCommand (string name) { this.name = name; }
     protected string name;
 
-    [Parameter(Position=0, Mandatory=true)]
+    [Parameter(Position = 0, Mandatory = true)]
     [Alias("With")]
     public string[] Value { get; set; }
 

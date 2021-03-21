@@ -11,22 +11,22 @@ namespace Atmosphere {
       return source == null || source.Count == 0;
     }
 
-    internal static bool IsNullOrEmpty<T>(this IEnumerable<T> source) {
+    internal static bool IsNullOrEmpty<T> (this IEnumerable<T> source) {
       return source == null || source.IsEmpty();
     }
-    internal static bool IsEmpty<T>(this IEnumerable<T> source) {
+    internal static bool IsEmpty<T> (this IEnumerable<T> source) {
       return !source.Any();
     }
 
-    internal static void ForEach<T>(this IEnumerable<T> source, Action<T> action) {
+    internal static void ForEach<T> (this IEnumerable<T> source, Action<T> action) {
       foreach (T item in source) { action(item); }
     }
 
-    internal static string Join<T>(this IEnumerable<T> source, char separator) {
+    internal static string Join<T> (this IEnumerable<T> source, char separator) {
       return String.Join(separator, source);
     }
 
-    internal static string FromPathList(this IEnumerable<DirectoryInfo> source) {
+    internal static string FromPathList (this IEnumerable<DirectoryInfo> source) {
       return source.Join(Path.PathSeparator);
     }
 
@@ -46,7 +46,7 @@ namespace Atmosphere {
       return table;
     }
 
-    internal static List<DirectoryInfo> IntoPathList(this string source) {
+    internal static List<DirectoryInfo> IntoPathList (this string source) {
       return source
         .Split(Path.PathSeparator)
         .Where(path => !path.IsNullOrEmpty())

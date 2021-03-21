@@ -6,18 +6,18 @@ using System;
 
 namespace Atmosphere.Commands {
 
-#region Get Cmdlets
+  #region Get Cmdlets
   [Cmdlet(VerbsCommon.Get, "EnvironmentPath")]
   [OutputType(typeof(List<DirectoryInfo>))]
   public class GetEnvironmentPath : ResultCommand {
-    sealed protected override void ProcessRecord() {
+    sealed protected override void ProcessRecord () {
       WriteObject(Environment.Current[Name].IntoPathList(), true);
     }
   }
 
   [Cmdlet(VerbsCommon.Get, "LDLibraryPath")]
   public sealed class GetLDLibraryPath : GetPathCommand {
-    public GetLDLibraryPath() : base("LD_LIBRARY_PATH") { }
+    public GetLDLibraryPath () : base("LD_LIBRARY_PATH") { }
   }
 
   [Cmdlet(VerbsCommon.Get, "PkgConfigPath")]
@@ -39,12 +39,12 @@ namespace Atmosphere.Commands {
   public sealed class GetSystemPath : GetPathCommand {
     public GetSystemPath () : base("PATH") { }
   }
-#endregion
+  #endregion
 
-#region Update Cmdlets
+  #region Update Cmdlets
   [Cmdlet(VerbsData.Update, "LDLibraryPath")]
   public sealed class UpdateLDLibraryPath : UpdatePathCommand {
-    public UpdateLDLibraryPath() : base("LD_LIBRARY_PATH") { }
+    public UpdateLDLibraryPath () : base("LD_LIBRARY_PATH") { }
   }
 
   [Cmdlet(VerbsData.Update, "PkgConfigPath")]
@@ -66,6 +66,6 @@ namespace Atmosphere.Commands {
   public sealed class UpdateSystemPath : UpdatePathCommand {
     public UpdateSystemPath () : base("PATH") { }
   }
-#endregion
+  #endregion
 
 }
