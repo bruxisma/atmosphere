@@ -24,6 +24,8 @@ jobs:
       run: dotnet nuget locals all --clear
     - name: Install Dependencies
       run: dotnet restore
+    - name: Install Tools
+      run: dotnet tool restore
     - name: Check Formatting
       run: dotnet format --check
     - name: Build Project
