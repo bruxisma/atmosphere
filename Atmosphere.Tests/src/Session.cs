@@ -8,23 +8,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 
-using Xunit.Abstractions;
-
 namespace Atmosphere.Tests {
-
-  public abstract class Test : IDisposable {
-    private readonly ITestOutputHelper output;
-    private readonly Session session;
-
-    protected Test (ITestOutputHelper output) {
-      this.output = output;
-      this.session = new Session(this);
-    }
-
-    public void Dispose () { this.session.Dispose(); }
-    public ITestOutputHelper Output { get => this.output; }
-    public Session Session { get => this.session; }
-  }
 
   public class Session : IDisposable {
 
