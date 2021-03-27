@@ -1,9 +1,5 @@
-using System.Management.Automation.Runspaces;
 using System.Management.Automation;
-using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
-using System;
 
 namespace Atmosphere.Commands {
   using EnvironmentDict = Hashtable;

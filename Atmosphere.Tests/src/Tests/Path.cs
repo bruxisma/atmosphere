@@ -3,13 +3,6 @@ using Xunit;
 
 namespace Atmosphere.Tests {
 
-  // TODO: Move this into its own file (Alongside class Test)
-  public class EnvironmentPathData : TheoryData {
-    public void Add (string key, params string[] paths) {
-      this.AddRow(key, paths);
-    }
-  }
-
   public class GetEnvironmentPath : PathTest {
     public GetEnvironmentPath (ITestOutputHelper output) :
       base(output, "ATMOSPHERE", "Get-EnvironmentPath") { }

@@ -1,4 +1,4 @@
-using System.Management.Automation.Runspaces;
+using System.Management.Automation.Language;
 using System.Management.Automation;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -19,6 +19,23 @@ namespace Atmosphere.Commands {
           .GetAwaiter()
           .GetResult();
       }
+    }
+
+    Dictionary<string, string> DataFile() {
+      ParseError[] errors;
+      Token[] tokens;
+      var ast = Parser.ParseFile(Path.ToString(), out tokens, out errors);
+      if (errors.Length > 0) {
+        /* Raise/Write an error record here */
+        throw new InvalidDataException();
+      }
+      var data = ast.Find(a => a is HashtableAst, false);
+      var pairs = (data.SafeGetValue() as HashtableAst).KeyValuePairs;
+      var dict = new Dictionary<string, string>(pairs.Count);
+      foreach ((var key, var value) in pairs) {
+        dict[key.SafeGetValue().ToString()] = value.SafeGetValue().ToString();
+      }
+      return dict;
     }
 
     protected override void Import () {
