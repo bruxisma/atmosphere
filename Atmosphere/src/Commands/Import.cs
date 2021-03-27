@@ -21,7 +21,7 @@ namespace Atmosphere.Commands {
       }
     }
 
-    Dictionary<string, string> DataFile() {
+    Dictionary<string, string> DataFile () {
       ParseError[] errors;
       Token[] tokens;
       var ast = Parser.ParseFile(Path.ToString(), out tokens, out errors);
