@@ -6,6 +6,7 @@
       "problemMatcher": "$msCompile",
       "command": "dotnet",
       "type": "process",
+      "dependsOn":["format"],
       "args": [
         "build",
         "--nologo",
@@ -42,17 +43,6 @@
       "type": "process",
       "args": [
         "format",
-        "${workspaceFolder}"
-      ]
-    },
-    {
-      "label": "check",
-      "problemMatcher": "$msCompile",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "format",
-        "--check",
         "${workspaceFolder}"
       ]
     },
