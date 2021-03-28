@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
@@ -52,6 +53,10 @@ namespace Atmosphere {
         .Where(path => !path.IsNullOrEmpty())
         .Select(path => new DirectoryInfo(path))
         .ToList();
+    }
+
+    internal static string Get (this Match match, string key) {
+      return match.Groups[key].Value;
     }
   }
 }

@@ -36,6 +36,27 @@
       }
     },
     {
+      "label": "format",
+      "problemMatcher": "$msCompile",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "format",
+        "${workspaceFolder}"
+      ]
+    },
+    {
+      "label": "check",
+      "problemMatcher": "$msCompile",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "format",
+        "--check",
+        "${workspaceFolder}"
+      ]
+    },
+    {
       "label": "package",
       "problemMatcher": "$msCompile",
       "command": "dotnet",
