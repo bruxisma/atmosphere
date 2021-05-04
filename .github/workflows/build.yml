@@ -29,6 +29,13 @@ jobs:
     - name: Check Formatting
       run: dotnet format --check
     - name: Build Project
-      run: dotnet build --configuration ${{ matrix.cfg }}
+      run: >-
+        dotnet build --no-restore
+        --configuration ${{ matrix.cfg }}
     - name: Run Tests
-      run: dotnet test --configuration ${{ matrix.cfg }} --collect:"XPlat Code Coverage"
+      run: >-
+        dotnet test --no-restore
+        --configuration ${{ matrix.cfg }}
+        --collect:"XPlat Code Coverage"
+        --verbosity normal
+

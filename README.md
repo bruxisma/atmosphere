@@ -100,11 +100,10 @@ Pop-Environment
 
 Atmosphere provides a small command to permit appending (or prepending)
 data to an environment variable. Additionally, we can also "import"
-environments, either from running foreign shell scripts (such as bash, nush,
-fish, and batch files), dotenv, JSON, and PSD1 (powershell data file), 
+environments, such as dotenv (.env), JSON, and PSD1 (powershell data) files.
 
 Please note that at the moment we *only* support importing from a JSON file,
-where the expected layout is `{ "key": "value" }`
+where the expected layout is `{ "key": "value" }`.
 
 [Powershell Gallery]: https://www.powershellgallery.com/
 [Unit Tests]: https://github.com/slurps-mad-rips/atmosphere/workflows/Build%20and%20Test/badge.svg
