@@ -39,6 +39,7 @@ jobs:
       run: >-
         dotnet test --no-restore
         --configuration ${{ matrix.cfg }}
-        /p:CollectCoverage=true
         --verbosity normal
+        /p:CollectCoverage=true
+        /p:CoverletOutputFormat=opencover
 
