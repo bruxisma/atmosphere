@@ -20,7 +20,9 @@
     <ProjectReference Include="..\Atmosphere\Atmosphere.csproj" />
     <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-  <Target Name="UploadCoverageToCodecov" AfterTargets="GenerateCoverageResultAfterTest">
+  <Target Name="UploadCoverageToCodecov"
+    AfterTargets="GenerateCoverageResultAfterTest"
+    Condition="'$(GITHUB_ACTIONS)' == 'true' And '$(CI)' == 'true'">
     <Codecov ReportFiles="@(CoverletReport)" Token="$(CODECOV_TOKEN)"/>
   </Target>
 </Project>
