@@ -33,6 +33,7 @@ jobs:
         dotnet build --no-restore
         --configuration ${{ matrix.cfg }}
     - name: Run Tests
+      working-directory: ${{github.workspace}}/Atmosphere.Tests
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: >-
