@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ matrix.version }}
-    # This is a temporary fix for https://github.com/actions/virtual-environments/issues/1090
+    # This is a temporary fix for https://github.com/actions/virtual-environments/issues/3038
     - name: NuGet Restore Workaround (1)
       run: dotnet clean --configuration ${{ matrix.cfg }}
     - name: NuGet Restore Workaround (2)
