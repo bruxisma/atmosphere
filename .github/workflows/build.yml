@@ -33,9 +33,11 @@ jobs:
         dotnet build --no-restore
         --configuration ${{ matrix.cfg }}
     - name: Run Tests
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: >-
         dotnet test --no-restore
         --configuration ${{ matrix.cfg }}
-        --collect:"XPlat Code Coverage"
+        /p:CollectCoverage=true
         --verbosity normal
 

@@ -11,16 +11,17 @@ namespace Atmosphere.Commands {
   [Cmdlet(VerbsData.Import, "Environment")]
   public sealed class ImportEnvironment : ImportCommand {
     static Regex extract = new Regex(@"\b(?<key>[^=]+)=(?<variable>.*)\b", RegexOptions.Compiled);
-    // Deserialize a JSON file to a dictionary.
-    // This needs to be expanded to allow reading a PSD1, XML, and other file
-    // types as desired.
-    Dictionary<string, string> JSON () {
-      using (FileStream fs = Path.OpenRead()) {
-        return JsonSerializer
-          .DeserializeAsync<Dictionary<string, string>>(fs)
-          .GetAwaiter()
-          .GetResult();
-      }
+
+    /// <summary>
+    /// JSON files *must* contain an object that can be converted into a
+    /// Dictionary<string, string>.
+    /// </summary>
+    public static Dictionary<string, string> JSON (FileInfo path) {
+      using var fs = path.OpenRead();
+      return JsonSerializer
+        .DeserializeAsync<Dictionary<string, string>>(fs)
+        .GetAwaiter()
+        .GetResult();
     }
 
     ///<summary>
@@ -32,15 +33,15 @@ namespace Atmosphere.Commands {
     /// Some additional extensions we support are things like
     /// ```
     ///  # A commented line where the comment is prefixed with whitespace
-    ///     
+    ///    
     /// # A blank line with a bunch of whitespace
     /// ```
     ///</summary>
-    Dictionary<string, string> DotEnv () {
+    public static Dictionary<string, string> DotEnv (FileInfo path) {
       var entries = new Dictionary<string, string>();
-      foreach (var line in File.ReadAllLines(Path.ToString())) {
+      foreach (var line in File.ReadAllLines(path.ToString())) {
         var text = line.TrimStart();
-        /* We skip commented or empty lines */
+        /* We skip empty lines or lines starting with a '#' comment */
         if (text.StartsWith('#') || text.IsEmpty()) { continue; }
         var match = extract.Match(text);
         entries.Add(match.Get("key"), match.Get("value"));
@@ -48,10 +49,15 @@ namespace Atmosphere.Commands {
       return entries;
     }
 
-    Dictionary<string, string> DataFile () {
+    /// <summary>
+    /// Most of this code is effectively line for line the same error as that
+    /// found in `Import-PowerShellDataFile`, however the results are combined
+    /// into a single dictionary and then returned.
+    /// </summary>
+    public static Dictionary<string, string> DataFile (FileInfo path) {
       ParseError[] errors;
       Token[] tokens;
-      var ast = Parser.ParseFile(Path.ToString(), out tokens, out errors);
+      var ast = Parser.ParseFile(path.ToString(), out tokens, out errors);
       if (errors.Length > 0) {
         /* Raise/Write an error record here */
         throw new InvalidDataException();
@@ -66,7 +72,7 @@ namespace Atmosphere.Commands {
     }
 
     protected override void Import () {
-      foreach (var entry in JSON()) {
+      foreach (var entry in JSON(Path)) {
         Environment.Current[entry.Key] = entry.Value;
       }
     }

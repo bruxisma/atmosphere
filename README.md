@@ -1,10 +1,10 @@
-# Overview 
+# Overview
 
 Atmosphere is a Powershell Core module for pushing, popping, getting, setting,
 updating, and importing environment variables. It currently works on Windows,
 macOS, and Linux. It's released under the MIT License.
 
-[![Unit Tests][]][Unit Test Workflow] [![Package][]][Package Workflow]
+[![Build and Tests][test-badge]][test-link] [![Package][package-badge]][package-link] [![codecov][coverage-badge]][coverage-link]
 
 # Installation
 
@@ -79,7 +79,7 @@ The following command (`Get-PSModulePath`) is functionally the same as the
 example found above.
 
 ```powershell
-Get-PSModulePath 
+Get-PSModulePath
 ```
 
 ## Pushing and Popping
@@ -106,7 +106,9 @@ Please note that at the moment we *only* support importing from a JSON file,
 where the expected layout is `{ "key": "value" }`.
 
 [Powershell Gallery]: https://www.powershellgallery.com/
-[Unit Tests]: https://github.com/slurps-mad-rips/atmosphere/workflows/Build%20and%20Test/badge.svg
-[Package]: https://github.com/slurps-mad-rips/atmosphere/workflows/Package/badge.svg
-[Unit Test Workflow]: https://github.com/slurps-mad-rips/atmosphere/actions/workflows/build.yml
-[Package Workflow]: https://github.com/slurps-mad-rips/atmosphere/actions/workflows/package.yml
+[coverage-badge]: https://codecov.io/gh/slurps-mad-rips/atmosphere/branch/master/graph/badge.svg?token=8NXYMFOUP7
+[coverage-link]: https://codecov.io/gh/slurps-mad-rips/atmosphere
+[package-badge]: https://github.com/slurps-mad-rips/atmosphere/workflows/Package/badge.svg
+[package-link]: https://github.com/slurps-mad-rips/atmosphere/actions/workflows/package.yml
+[test-badge]: https://github.com/slurps-mad-rips/atmosphere/workflows/Build%20and%20Test/badge.svg
+[test-link]: https://github.com/slurps-mad-rips/atmosphere/actions/workflows/build.yml
