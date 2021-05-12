@@ -106,7 +106,7 @@ Please note that at the moment we *only* support importing from a JSON file,
 where the expected layout is `{ "key": "value" }`.
 
 [Powershell Gallery]: https://www.powershellgallery.com/
-[coverage-badge]: https://codecov.io/gh/slurps-mad-rips/atmosphere/branch/master/graph/badge.svg?token=8NXYMFOUP7
+[coverage-badge]: https://codecov.io/gh/slurps-mad-rips/atmosphere/branch/main/graph/badge.svg?token=8NXYMFOUP7
 [coverage-link]: https://codecov.io/gh/slurps-mad-rips/atmosphere
 [package-badge]: https://github.com/slurps-mad-rips/atmosphere/workflows/Package/badge.svg
 [package-link]: https://github.com/slurps-mad-rips/atmosphere/actions/workflows/package.yml
