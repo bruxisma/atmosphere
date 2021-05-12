@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: github-ations
+  - package-ecosystem: github-actions
     directory: /
     schedule:
       timezone: America/Los_Angeles
