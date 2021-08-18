@@ -9,6 +9,7 @@ jobs:
         version: ['3.1.x']
     runs-on: ${{ matrix.os }}
     env:
+      NUGET_PACKAGES: ~/.cache/nuget
       DOTNET_NOLOGO: true
     steps:
     - name: Checkout Repository
@@ -17,6 +18,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ matrix.version }}
+    - name: Restore NuGet Cache
+      uses: actions/cache@v2
+      with:
+        path: ${{env.NUGET_PACKAGES}}
+        restore-keys: ${{runner.os}}-nuget-
+        key: ${{runner.os}}-nuget-${{hashFiles('*/*.csproj')}}
     - name: Install Dependencies
       run: dotnet restore
     - name: Install Tools

@@ -20,7 +20,7 @@
   </ItemGroup>
   <Target Name="UploadCoverageToCodecov"
           AfterTargets="GenerateCoverageResultAfterTest"
-          Condition="'$(GITHUB_ACTIONS)' == 'true' And '$(CI)' == 'true'">
+          Condition="'$(ContinuousIntegrationBuild)' == 'true'">
     <Codecov ReportFiles="@(CoverletReport)" />
   </Target>
 </Project>
