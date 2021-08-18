@@ -5,7 +5,7 @@ namespace Atmosphere.Commands {
   using EnvironmentDict = Hashtable;
 
   [Cmdlet(VerbsCommon.Push, "Environment")]
-  public class PushEnvironment : PSCmdlet {
+  public sealed class PushEnvironment : PSCmdlet {
     [Parameter(Position = 0)]
     public EnvironmentDict State { get; set; }
 
@@ -19,7 +19,7 @@ namespace Atmosphere.Commands {
   }
 
   [Cmdlet(VerbsCommon.Pop, "Environment")]
-  public class PopEnvironment : PSCmdlet {
+  public sealed class PopEnvironment : PSCmdlet {
     protected override void ProcessRecord () {
       foreach (var entry in EnvironmentStack.Pop()) {
         Environment.Current[entry.Key] = entry.Value;

@@ -4,7 +4,9 @@ Atmosphere is a Powershell Core module for pushing, popping, getting, setting,
 updating, and importing environment variables. It currently works on Windows,
 macOS, and Linux. It's released under the MIT License.
 
-[![Build and Tests][test-badge]][test-link] [![Package][package-badge]][package-link] [![codecov][coverage-badge]][coverage-link]
+[![Build and Tests][test-badge]][test-link]
+[![Package][package-badge]][package-link]
+[![codecov][coverage-badge]][coverage-link]
 
 # Installation
 

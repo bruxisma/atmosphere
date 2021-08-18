@@ -1,28 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CoverletOutputFormat>opencover</CoverletOutputFormat>
+    <CollectCoverage>true</CollectCoverage>
+    <UseSourceLink>true</UseSourceLink>
     <IsPackable>false</IsPackable>
+    <Exclude>[System.Text.Encodings.Web]*</Exclude>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="codecov.msbuild" Version="1.13.0" />
-    <PackageReference Include="coverlet.msbuild" Version="3.1.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
-    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.7" />
+    <PackageReference Include="codecov.msbuild" Version="1.13.0" />
+    <PackageReference Include="coverlet.collector" Version="3.1.0" />
+    <PackageReference Include="coverlet.msbuild" Version="3.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
-    <PackageReference Include="coverlet.collector" Version="3.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atmosphere\Atmosphere.csproj" />
     <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <Target Name="UploadCoverageToCodecov"
-    AfterTargets="GenerateCoverageResultAfterTest"
-    Condition="'$(GITHUB_ACTIONS)' == 'true' And '$(CI)' == 'true'">
-    <Codecov ReportFiles="@(CoverletReport)" Token="$(CODECOV_TOKEN)"/>
+          AfterTargets="GenerateCoverageResultAfterTest"
+          Condition="'$(GITHUB_ACTIONS)' == 'true' And '$(CI)' == 'true'">
+    <Codecov ReportFiles="@(CoverletReport)" />
   </Target>
 </Project>

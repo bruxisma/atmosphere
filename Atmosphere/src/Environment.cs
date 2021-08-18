@@ -5,7 +5,7 @@ using System.IO;
 using System;
 
 namespace Atmosphere {
-  internal class Environment {
+  internal sealed class Environment {
     internal static readonly Environment Current = new Environment();
 
     internal Dictionary<string, string> Variables {
