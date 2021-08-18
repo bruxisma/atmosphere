@@ -9,7 +9,7 @@ jobs:
         version: ['3.1.x']
     runs-on: ${{ matrix.os }}
     env:
-      NUGET_PACKAGES: ~/.cache/nuget
+      NUGET_PACKAGES: $HOME/.cache/nuget
       DOTNET_NOLOGO: true
     steps:
     - name: Checkout Repository
