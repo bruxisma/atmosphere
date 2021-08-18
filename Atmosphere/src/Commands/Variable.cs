@@ -7,7 +7,7 @@ using System;
 namespace Atmosphere.Commands {
   [Cmdlet(VerbsCommon.Get, "EnvironmentVariable")]
   [OutputType(typeof(string))]
-  public class GetEnvironmentVariable : ResultCommand {
+  public sealed class GetEnvironmentVariable : ResultCommand {
     sealed protected override void ProcessRecord () {
       WriteObject(Environment.Current[Name]);
     }

@@ -17,11 +17,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ matrix.version }}
-    # This is a temporary fix for https://github.com/actions/virtual-environments/issues/3038
-    - name: NuGet Restore Workaround (1)
-      run: dotnet clean --configuration ${{ matrix.cfg }}
-    - name: NuGet Restore Workaround (2)
-      run: dotnet nuget locals all --clear
     - name: Install Dependencies
       run: dotnet restore
     - name: Install Tools
@@ -34,12 +29,7 @@ jobs:
         --configuration ${{ matrix.cfg }}
     - name: Run Tests
       working-directory: ${{github.workspace}}/Atmosphere.Tests
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: >-
         dotnet test --no-restore
         --configuration ${{ matrix.cfg }}
-        --verbosity normal
-        /p:CollectCoverage=true
-        /p:CoverletOutputFormat=opencover
-
+        --logger "console,verbosity=normal"

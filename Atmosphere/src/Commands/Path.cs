@@ -9,7 +9,7 @@ namespace Atmosphere.Commands {
   #region Get Cmdlets
   [Cmdlet(VerbsCommon.Get, "EnvironmentPath")]
   [OutputType(typeof(List<DirectoryInfo>))]
-  public class GetEnvironmentPath : ResultCommand {
+  public sealed class GetEnvironmentPath : ResultCommand {
     sealed protected override void ProcessRecord () {
       WriteObject(Environment.Current[Name].IntoPathList(), true);
     }

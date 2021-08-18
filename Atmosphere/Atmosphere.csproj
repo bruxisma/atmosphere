@@ -1,9 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <!-- Contains Custom Actions -->
-  <Import Project="Atmosphere.targets" />
   <!-- Package Metadata -->
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>Atmosphere</AssemblyName>
     <Authors>Isabella Muerte</Authors>
     <Version>1.0.0-alpha</Version>
@@ -13,7 +10,6 @@
     <RepositoryUrl>https://github.com/slurps-mad-rips/atmosphere</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   <!-- Build Properties -->
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <PackageOutputPath>$(SolutionDir)</PackageOutputPath>
     <TargetsForTfmSpecificContentInPackage>PowershellManifest</TargetsForTfmSpecificContentInPackage>
     <IncludeBuildOutput>false</IncludeBuildOutput>
@@ -23,7 +19,6 @@
     <Pwsh>pwsh -NoProfile -NonInteractive -NoLogo</Pwsh>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.7" PrivateAssets="All" />
     <None Include="$(AssemblyName).ps?1" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <Target Name="PowershellManifest">
