@@ -4,7 +4,7 @@
   CompanyName = ''
   Copyright = '(c) Isabella Muerte. All rights reserved.'
   Description = 'Cmdlets for working with environment variables and paths'
-  ModuleVersion = '1.0.0'
+  ModuleVersion = '0.2.0'
   CompatiblePSEditions = 'Core'
   PowerShellVersion = '7.0'
   RootModule = 'Atmosphere.dll'
@@ -36,28 +36,37 @@
       ProjectUri = 'https://github.com/slurps-mad-rips/atmosphere'
       Prerelease = 'Alpha'
       ReleaseNotes = @'
-# 1.0.0-Alpha
+# 0.2.0-Alpha
 
 ♻ Rewrote all cmdlets as Binary Cmdlets.
-  While this might be considered unnecessary it did result in less memory usage
-  and paved a way to better understand using .NET Core with Powershell. In
-  other words, we're one step closer to "automatically binding" C and C++
-  libraries to .NET and then turning them into Cmdlets. This means nearly
-  anything can be done in powershell. And that's terrifying.
 
-  Another reason this rewrite was done was to fix some type system hacks that
-  we had to work around. Now you can pass a properly typed dictionary into
-  `Push-Environment`.
+While this might be considered unnecessary, it has resulted in less memory
+usage and faster execution. Additionally, several type system "hacks" were
+fixed with this move. As an example a properly typed dictionary can be given to
+`Push-Environment`
 
-✨ Added several new cmdlets.
+✨ Added Several Convenience Cmdlets
 
- * `Get-LDLibraryPath`
- * `Get-PkgConfigPath`
- * `Get-PSModulePath`
- * `Get-SystemPath`
- * `Get-PythonPath`
+ - `Get-LDLibraryPath`
+ - `Get-PkgConfigPath`
+ - `Get-PSModulePath`
+ - `Get-PythonPath`
+ - `Get-SystemPath`
 
- * `Update-EnvironmentPath`
+These all return well known environment variables. `Get-SystemPath` refers to
+the `${env:PATH}` variable. There are also `Update-` versions of each.
+
+ - `Update-LDLibraryPath`
+ - `Update-PkgConfigPath`
+ - `Update-PSModulePath`
+ - `Update-PythonPath`
+ - `Update-SystemPath`
+
+✨ Added `Import-Environment` cmdlet
+
+This is currently underpowered (hence the 0.2.0-Alpha), but it is currently
+capable of importing JSON files into a user's environment. Soon we will support
+PowerShell's PSD1 format, and .env files as well.
 
 🚚 Renamed several cmdlets and reorganized operations.
 
@@ -67,8 +76,9 @@
    not exist
 
 🔥 Removed builtin Aliases.
-  These could easily clash and users should alias cmdlets themselves. We aren't
-  microsoft, so providing aliases should be done in a user's profile.
+
+These could easily clash and users should alias cmdlets themselves. We aren't
+Microsoft, so providing aliases should be done in a user's profile.
 
 # 0.1.1
 
