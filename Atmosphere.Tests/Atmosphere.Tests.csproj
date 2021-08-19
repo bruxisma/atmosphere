@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk" ToolsetVersion="16.11.0">
   <PropertyGroup>
     <CoverletOutputFormat>opencover</CoverletOutputFormat>
     <CollectCoverage>true</CollectCoverage>

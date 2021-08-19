@@ -1,17 +1,25 @@
 <Project>
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RestoreUseStaticGraphEvaluation>true</RestoreUseStaticGraphEvaluation>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true' And '$(CI)' == 'true'">
-    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' != 'true'">
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <ItemGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
-    <PackageReference Include="Microsoft.SourceLink.Github" Version="1.0.0" PrivateAssets="All" />
-  </ItemGroup>
+  <Choose>
+    <When Condition="'$(GITHUB_ACTIONS)' == 'true' And '$(CI)' == 'true'">
+      <PropertyGroup>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+      </PropertyGroup>
+      <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.Github" Version="1.0.0" PrivateAssets="All" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <Deterministic>true</Deterministic>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
   <ItemGroup>
     <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.7" PrivateAssets="All" />
   </ItemGroup>
