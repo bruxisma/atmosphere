@@ -1,17 +1,28 @@
 <Project>
   <PropertyGroup>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <RestoreUseStaticGraphEvaluation>true</RestoreUseStaticGraphEvaluation>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>Environment Variable and Environment Path Manipulation</Description>
+    <RepositoryUrl>https://github.com/slurps-mad-rips/atmosphere</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Authors>Isabella Muerte</Authors>
+    <Version>0.3.0-alpha</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.PowerShell.SDK" PrivateAssets="All" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(GITHUB_ACTIONS)' == 'true' And '$(CI)' == 'true'">
       <PropertyGroup>
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
       </PropertyGroup>
       <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.Github" Version="1.0.0" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.SourceLink.Github" PrivateAssets="All" />
       </ItemGroup>
     </When>
     <Otherwise>
@@ -20,7 +31,4 @@
       </PropertyGroup>
     </Otherwise>
   </Choose>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.7" PrivateAssets="All" />
-  </ItemGroup>
 </Project>

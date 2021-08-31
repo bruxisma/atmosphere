@@ -4,9 +4,9 @@
   CompanyName = ''
   Copyright = '(c) Isabella Muerte. All rights reserved.'
   Description = 'Cmdlets for working with environment variables and paths'
-  ModuleVersion = '0.2.0'
+  ModuleVersion = '0.3.0'
   CompatiblePSEditions = 'Core'
-  PowerShellVersion = '7.0'
+  PowerShellVersion = '7.1'
   RootModule = 'Atmosphere.dll'
 
   CmdletsToExport = @(
@@ -36,6 +36,22 @@
       ProjectUri = 'https://github.com/slurps-mad-rips/atmosphere'
       Prerelease = 'Alpha'
       ReleaseNotes = @'
+# 0.3.0-Alpha
+
+⬆ Upgrade to Powershell 7.1 and .NET 5
+
+This was a long time coming, as 7.1 is the closest thing to a stable release
+for some time now. The primary changes with this release are a bump in
+dependencies and a change in how the project is generated. Having the prior
+0.2.0-Alpha allows us to break free from Powershell 7.0 and still have a
+general 'upgrade' path for users.
+
+🔨 Modify build system to be more streamlined/helpful
+
+The build system was streamlined ever so slightly to improve the build
+experience. We still have a bunch of work to go, but the build itself is now
+more helpful in GitHub Actions.
+
 # 0.2.0-Alpha
 
 ♻ Rewrote all cmdlets as Binary Cmdlets.

@@ -1,4 +1,14 @@
 <Project ToolsVersion="16.11.0">
+  <!--Import Project="GitHub.targets" Condition="'$(ContinuousIntegrationBuild)' == 'true'"/-->
+  <Target Name="GroupStart" BeforeTargets="CoreCompile;Pack;VSTest" Condition="'$(ContinuousIntegrationBuild)' == 'true'">
+    <Message Importance="High" Text="::group::$(MSBuildProjectName)" />
+  </Target>
+  <Target Name="GroupEnd" AfterTargets="Build;Pack;VSTest" Condition="'$(ContinuousIntegrationBuild)' == 'true'">
+    <Message Importance="High" Text="::endgroup::" />
+  </Target>
+  <Target Name="GithubActions" AfterTargets="Pack" Condition="'$(PackageFilename)' != '' and '$(ContinuousIntegrationBuild)' == 'true'">
+    <Message Importance="High" Text="::set-output name=package::$(PackageOutputPath)$(PackageFilename)" />
+  </Target>
   <UsingTask TaskName="GetArchiveEntries"
              TaskFactory="RoslynCodeTaskFactory"
              AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">

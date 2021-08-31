@@ -25,11 +25,11 @@ jobs:
       run: dotnet format --check
     - name: Build Project
       run: >-
-        dotnet build --no-restore
+        dotnet build --nologo --no-restore
         --configuration ${{ matrix.cfg }}
     - name: Run Tests
       working-directory: ${{github.workspace}}/Atmosphere.Tests
       run: >-
-        dotnet test --no-restore
+        dotnet test --nologo --no-restore
         --configuration ${{ matrix.cfg }}
         --logger "console;verbosity=normal"
