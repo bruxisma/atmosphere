@@ -1,15 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk" ToolsetVersion="16.11.0">
+<Project Sdk="Microsoft.NET.Sdk" >
   <!-- Package Metadata -->
   <PropertyGroup>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
-    <Authors>Isabella Muerte</Authors>
-    <Version>0.2.0-alpha</Version>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <!--PackageReadmeFile>README.md</PackageReadmeFile-->
     <PackageType>PowershellBinaryModule</PackageType>
-    <Description>Environment Variable and Environment Path Manipulation</Description>
-    <RepositoryUrl>https://github.com/slurps-mad-rips/atmosphere</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
     <!-- Build Properties -->
     <PackageOutputPath>$(SolutionDir)</PackageOutputPath>
     <TargetsForTfmSpecificContentInPackage>PowershellManifest</TargetsForTfmSpecificContentInPackage>
@@ -17,7 +11,6 @@
     <NoWarn>NU5100;NU5128</NoWarn>
     <!-- Custom Properties -->
     <PackageFilename>$(AssemblyName).$(Version).nupkg</PackageFilename>
-    <Pwsh>pwsh -NoProfile -NonInteractive -NoLogo</Pwsh>
   </PropertyGroup>
   <ItemGroup>
     <None Include="$(AssemblyName).ps?1" CopyToOutputDirectory="PreserveNewest" />
@@ -30,6 +23,6 @@
     </ItemGroup>
   </Target>
   <Target Name="Inspect" DependsOnTargets="Pack">
-    <GetArchiveEntries Archive="$(PackageOutputPath)\$(PackageFilename)"/>
+    <GetArchiveEntries Archive="$(PackageOutputPath)\$(PackageFilename)" />
   </Target>
 </Project>

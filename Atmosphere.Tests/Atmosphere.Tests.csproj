@@ -1,18 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk" ToolsetVersion="16.11.0">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <CoverletOutputFormat>opencover</CoverletOutputFormat>
     <CollectCoverage>true</CollectCoverage>
     <UseSourceLink>true</UseSourceLink>
+    <IsTestProject>true</IsTestProject>
     <IsPackable>false</IsPackable>
     <Exclude>[System.Text.Encodings.Web]*</Exclude>
+    <RunSettingsFilePath>$(MSBuildProjectDirectory)\xunit.runsettings</RunSettingsFilePath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
-    <PackageReference Include="codecov.msbuild" Version="1.13.0" />
-    <PackageReference Include="coverlet.collector" Version="3.1.0" />
-    <PackageReference Include="coverlet.msbuild" Version="3.1.0" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="codecov.msbuild" />
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="coverlet.msbuild" />
+    <PackageReference Include="xunit"/>
+    <PackageReference Include="xunit.runner.visualstudio" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atmosphere\Atmosphere.csproj" />
