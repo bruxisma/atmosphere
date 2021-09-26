@@ -8,7 +8,7 @@
   <PropertyGroup>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Environment Variable and Environment Path Manipulation</Description>
-    <RepositoryUrl>https://github.com/slurps-mad-rips/atmosphere</RepositoryUrl>
+    <RepositoryUrl>https://github.com/bruxisma/atmosphere</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Authors>Isabella Muerte</Authors>
     <Version>0.3.0-alpha</Version>

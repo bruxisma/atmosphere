@@ -33,7 +33,7 @@
   PrivateData = @{
     PSData = @{
       Tags = @("Environment", "Utility", "EnvVars", "Linux", "Windows", "Mac")
-      ProjectUri = 'https://github.com/slurps-mad-rips/atmosphere'
+      ProjectUri = 'https://github.com/bruxisma/atmosphere'
       Prerelease = 'Alpha'
       ReleaseNotes = @'
 # 0.3.0-Alpha
