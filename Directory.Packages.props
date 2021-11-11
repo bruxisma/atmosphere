@@ -5,7 +5,7 @@
   <ItemGroup>
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
     <PackageVersion Include="Microsoft.PowerShell.SDK" Version="7.1.4" Pin="true"/>
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.0.0" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageVersion Include="codecov.msbuild" Version="1.13.0" />
     <PackageVersion Include="coverlet.collector" Version="3.1.0" />
     <PackageVersion Include="coverlet.msbuild" Version="3.1.0" />
