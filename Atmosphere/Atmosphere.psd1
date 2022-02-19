@@ -6,7 +6,7 @@
   Description = 'Cmdlets for working with environment variables and paths'
   ModuleVersion = '0.3.0'
   CompatiblePSEditions = 'Core'
-  PowerShellVersion = '7.1'
+  PowerShellVersion = '7.2'
   RootModule = 'Atmosphere.dll'
 
   CmdletsToExport = @(
@@ -38,13 +38,12 @@
       ReleaseNotes = @'
 # 0.3.0-Alpha
 
-⬆ Upgrade to Powershell 7.1 and .NET 5
+⬆ Upgrade to Powershell 7.2 and .NET 6
 
-This was a long time coming, as 7.1 is the closest thing to a stable release
-for some time now. The primary changes with this release are a bump in
-dependencies and a change in how the project is generated. Having the prior
-0.2.0-Alpha allows us to break free from Powershell 7.0 and still have a
-general 'upgrade' path for users.
+This was a long time coming, as 7.2 is am LTS release now. The primary changes
+with this release are a bump in dependencies and a change in how the project is
+generated. Having the prior 0.2.0-Alpha allows us to break free from Powershell
+7.0 and still have a general 'upgrade' path for users.
 
 🔨 Modify build system to be more streamlined/helpful
 
