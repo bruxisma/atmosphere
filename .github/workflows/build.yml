@@ -6,7 +6,7 @@ jobs:
       matrix:
         cfg: [Release, Debug]
         os: [ubuntu-latest, macos-latest, windows-latest]
-        version: ['5.x']
+        version: ['6.x']
     runs-on: ${{ matrix.os }}
     env:
       DOTNET_NOLOGO: true
@@ -22,7 +22,7 @@ jobs:
     - name: Install Tools
       run: dotnet tool restore
     - name: Check Formatting
-      run: dotnet format --check
+      run: dotnet format --verify-no-changes
     - name: Build Project
       run: >-
         dotnet build --nologo --no-restore
