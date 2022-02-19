@@ -22,7 +22,7 @@ jobs:
     - name: Install Tools
       run: dotnet tool restore
     - name: Check Formatting
-      run: dotnet format --check
+      run: dotnet format --verify-no-changes
     - name: Build Project
       run: >-
         dotnet build --nologo --no-restore
