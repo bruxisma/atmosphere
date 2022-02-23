@@ -1,1 +1,34 @@
-{ "extends": [ "bruxisma/renovate" ] }
+{
+  "extends": [ "bruxisma/renovate" ],
+  "nuget": {
+    "addLabels": ["renovate:dotnet"],
+    "additionalBranchPrefix": "dotnet/",
+    "commitMessageTopic": "🥅 .NET Package {{{depName}}}",
+    "packageRules": [
+      {
+        "addLabels": ["dotnet:msft"],
+        "groupName": ["Microsoft"],
+        "groupSlug": "microsoft",
+        "matchPackagePrefixes": ["Microsoft."]
+      },
+      {
+        "addLabels": ["dotnet:coverage"],
+        "groupName": ["Coverage"],
+        "groupSlug": "coverage",
+        "matchPackagePrefixes": ["coverlet.", "codecov."]
+      },
+      {
+        "addLabels": ["dotnet:tests"],
+        "groupName": ["Testing"],
+        "groupSlug": "testing",
+        "matchPackagePrefixes": ["xunit", "xunit."]
+      }
+    ],
+    "pin": {
+      "group": {
+        "commitMessageTopic": "🥅 {{{groupName}}} Packages"
+      },
+      "groupName": ".NET"
+    },
+  }
+}
