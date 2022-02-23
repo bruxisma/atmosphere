@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # tag=v2
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@499789684c9a0d41c9b3f0d66a785ba17b1d51ab # tag=v1
         with:
           dotnet-version: ${{ matrix.version }}
       - name: Install Dependencies
