@@ -29,6 +29,6 @@
         "commitMessageTopic": "🥅 {{{groupName}}} Packages"
       },
       "groupName": ".NET"
-    },
+    }
   }
 }
