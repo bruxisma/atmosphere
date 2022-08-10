@@ -3,7 +3,7 @@
     <MicrosoftBuildPackageVersion>16.11.0</MicrosoftBuildPackageVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
     <PackageVersion Include="Microsoft.PowerShell.SDK" Version="7.2.5" Pin="true"/>
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageVersion Include="codecov.msbuild" Version="1.13.0" />
