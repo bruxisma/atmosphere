@@ -21,27 +21,6 @@ namespace Atmosphere.Commands {
     sealed protected override void BeginProcessing () { Value = Value ?? ""; }
   }
 
-  public class ImportCommand : PSCmdlet {
-    [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true)]
-    [ValidateNotNullOrEmpty()]
-    public FileInfo Path { get; set; }
-
-    [Parameter()]
-    public SwitchParameter Overwrite { get; set; } = false;
-
-    sealed protected override void BeginProcessing () {
-      if (Path.Exists) { return; }
-      throw new ArgumentException("Path", $"'{Path}' does not exist");
-    }
-
-    sealed protected override void ProcessRecord () {
-      if (!Overwrite) { EnvironmentStack.Push(); }
-      Import();
-    }
-
-    protected virtual void Import () { }
-  }
-
   [OutputType(typeof(List<DirectoryInfo>))]
   public class GetPathCommand : PSCmdlet {
     protected GetPathCommand (string name) { this.name = name; }

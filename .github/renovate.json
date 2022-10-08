@@ -1,1 +1,9 @@
-{ "extends": ["bruxisma/renovate"] }
+{
+  "extends": ["bruxisma/renovate"],
+  "packageRules": [
+    {
+      "matchPackageNames": ["Microsoft.PowerShell.SDK"],
+      "allowedVersions": "<7.3"
+    }
+  ]
+}

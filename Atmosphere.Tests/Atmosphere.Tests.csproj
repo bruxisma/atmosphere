@@ -13,8 +13,9 @@
     <PackageReference Include="codecov.msbuild" />
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="coverlet.msbuild" />
-    <PackageReference Include="xunit"/>
+    <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="GitHubActionsTestLogger" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atmosphere\Atmosphere.csproj" />
