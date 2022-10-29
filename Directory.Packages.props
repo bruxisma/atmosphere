@@ -7,8 +7,8 @@
     <PackageVersion Include="Microsoft.PowerShell.SDK" Version="7.2.7" Pin="true"/>
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageVersion Include="codecov.msbuild" Version="1.13.0" />
-    <PackageVersion Include="coverlet.collector" Version="3.1.2" />
-    <PackageVersion Include="coverlet.msbuild" Version="3.1.2" />
+    <PackageVersion Include="coverlet.collector" Version="3.2.0" />
+    <PackageVersion Include="coverlet.msbuild" Version="3.2.0" />
     <PackageVersion Include="xunit" Version="2.4.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5" />
   </ItemGroup>
