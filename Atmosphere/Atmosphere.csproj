@@ -22,7 +22,4 @@
       <TfmSpecificPackageFile Include="$(AssemblyName).ps?1" PackagePath="" />
     </ItemGroup>
   </Target>
-  <Target Name="Inspect" DependsOnTargets="Pack">
-    <GetArchiveEntries Archive="$(PackageOutputPath)\$(PackageFilename)" />
-  </Target>
 </Project>

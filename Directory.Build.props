@@ -13,6 +13,7 @@
     <Authors>Isabella Muerte</Authors>
     <VersionPrefix>0.3.0</VersionPrefix>
     <Version Condition="'$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</Version>
+    <Version Condition="'$(VersionSuffix)' == ''">$(VersionPrefix)</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.PowerShell.SDK" PrivateAssets="All" />
