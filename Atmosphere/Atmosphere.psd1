@@ -7,7 +7,7 @@
   ModuleVersion = '0.3.0'
   CompatiblePSEditions = 'Core'
   PowerShellVersion = '7.2'
-  RootModule = 'Atmosphere.dll'
+  RootModule = "Atmosphere.dll"
 
   CmdletsToExport = @(
     'Get-EnvironmentVariable'
@@ -33,9 +33,8 @@
     PSData = @{
       Tags = @("Environment", "Utility", "EnvVars", "Linux", "Windows", "Mac")
       ProjectUri = 'https://github.com/bruxisma/atmosphere'
-      Prerelease = 'Alpha'
       ReleaseNotes = @'
-# 0.3.0-Alpha
+# 0.3.0
 
 ⬆ Upgrade to Powershell 7.2 and .NET 6
 
