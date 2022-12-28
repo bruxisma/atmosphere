@@ -4,7 +4,7 @@
   CompanyName = ''
   Copyright = '(c) Isabella Muerte. All rights reserved.'
   Description = 'Cmdlets for working with environment variables and paths'
-  ModuleVersion = '0.3.0'
+  ModuleVersion = '0.3.1'
   CompatiblePSEditions = 'Core'
   PowerShellVersion = '7.2'
   RootModule = "Atmosphere.dll"
