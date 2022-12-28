@@ -32,4 +32,4 @@ jobs:
       run: >-
         dotnet test --nologo --no-restore
         --configuration ${{ matrix.cfg }}
-        --logger "console;verbosity=normal"
+        --logger GitHubActions

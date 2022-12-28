@@ -16,7 +16,7 @@ namespace Atmosphere.Tests {
       this.session = new Session(this);
     }
 
-    public void Dispose () { this.session.Dispose(); }
+    public virtual void Dispose () { this.session.Dispose(); }
     public ITestOutputHelper Output { get => this.output; }
     public Session Session { get => this.session; }
   }
@@ -55,6 +55,4 @@ namespace Atmosphere.Tests {
     ///<summary>Name of command to add</summary>
     public string Command { get; protected set; }
   }
-
-
 }

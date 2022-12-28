@@ -1,7 +1,7 @@
 name: Package
 on:
   push:
-    tags: [v1.*]
+    tags: [v*]
 jobs:
   build:
     strategy:
