@@ -1,15 +1,16 @@
 name: Package
 on:
   push:
+    branches: [main]
     tags: [v*]
 jobs:
   build:
     strategy:
       matrix:
         cfg: [debug, release]
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        version: ['3.1.x']
-    runs-on: ${{ matrix.os }}
+        os: [ubuntu, macos, windows]
+        version: ['6.x']
+    runs-on: ${{ matrix.os }}-latest
     env:
       DOTNET_NOLOGO: true
     steps:
@@ -24,14 +25,20 @@ jobs:
       - name: Build Project
         run: dotnet build --configuration ${{ matrix.cfg }}
       - name: Create Package
+        id: pack
         run: >-
           dotnet pack --nologo
           --no-build
           --configuration ${{ matrix.cfg }}
           --version-suffix ${{ github.sha }}
-        id: pack
+      - name: Upload Package Artifact
+        if: github.ref_type == 'branch'
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{matrix.os}}-${{steps.pack.outputs.package-filename}}
+          path: ${{steps.pack.outputs.package-filepath}}
       - name: Publish Package
-        if: matrix.cfg == 'release'
+        if: matrix.cfg == 'release' && github.ref_type == 'tag'
         run: >-
           dotnet nuget push --nologo
           --force-english-output
@@ -39,4 +46,4 @@ jobs:
           --api-key ${{secrets.PWSH_TOKEN}}
           --source https://www.powershellgallery.com
           --timeout 60
-          ${{steps.pack.outputs.package}}
+          ${{steps.pack.outputs.package-filepath}}

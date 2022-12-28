@@ -23,7 +23,6 @@
     'Update-PSModulePath'
     'Update-PythonPath'
     'Update-SystemPath'
-    'Import-Environment'
     'Push-Environment'
     'Pop-Environment'
   )
@@ -45,11 +44,22 @@ with this release are a bump in dependencies and a change in how the project is
 generated. Having the prior 0.2.0-Alpha allows us to break free from Powershell
 7.0 and still have a general 'upgrade' path for users.
 
+Of note: This release will most likely be the last one, with some brief cooking
+before a proper 1.0 release.
+
 🔨 Modify build system to be more streamlined/helpful
 
 The build system was streamlined ever so slightly to improve the build
 experience. We still have a bunch of work to go, but the build itself is now
 more helpful in GitHub Actions.
+
+🔥 Removed the Import-Environment cmdlet
+
+After a bunch of frustration it was basically impossible to properly test the
+Import-Environment cmdlet for PSD files, JSON files required strings on both
+sides, and .env files were a nightmare to support. In the end, this feature has
+been cut for the 0.3.0 release, and any future releases because I have no
+desire to support any of this.
 
 # 0.2.0-Alpha
 

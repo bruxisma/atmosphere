@@ -11,7 +11,9 @@
     <RepositoryUrl>https://github.com/bruxisma/atmosphere</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Authors>Isabella Muerte</Authors>
-    <Version>0.3.0-alpha</Version>
+    <VersionPrefix>0.3.0</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
+    <Version>$(VersionPrefix)-$(VersionSuffix)</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.PowerShell.SDK" PrivateAssets="All" />

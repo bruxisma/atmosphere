@@ -1,5 +1,4 @@
 <Project ToolsVersion="16.11.0">
-  <!--Import Project="GitHub.targets" Condition="'$(ContinuousIntegrationBuild)' == 'true'"/-->
   <Target Name="GroupStart" BeforeTargets="CoreCompile;Pack;VSTest" Condition="'$(ContinuousIntegrationBuild)' == 'true'">
     <Message Importance="High" Text="::group::$(MSBuildProjectName)" />
   </Target>
@@ -7,34 +6,7 @@
     <Message Importance="High" Text="::endgroup::" />
   </Target>
   <Target Name="GithubActions" AfterTargets="Pack" Condition="'$(PackageFilename)' != '' and '$(ContinuousIntegrationBuild)' == 'true'">
-    <Message Importance="High" Text="::set-output name=package::$(PackageOutputPath)$(PackageFilename)" />
+    <WriteLinesToFile File="$(GITHUB_OUTPUT)" Lines="package-filepath=$(PackageOutputPath)$(PackageFilename)" />
+    <WriteLinesToFile File="$(GITHUB_OUTPUT)" Lines="package-filename=$(PackageFilename)" />
   </Target>
-  <UsingTask TaskName="GetArchiveEntries"
-             TaskFactory="RoslynCodeTaskFactory"
-             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
-    <ParameterGroup>
-      <Archive ParameterType="System.String" Required="true" />
-      <Entries ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="Microsoft.Build.Utilities" />
-      <Using Namespace="System.Collections.Generic" />
-      <Using Namespace="System.IO.Compression" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="System" />
-      <Code Type="Fragment" Language="C#">
-        <![CDATA[
-          var entries = new List<TaskItem>();
-          Log.LogMessage($"Listing entries for {Archive}");
-          using (var archive = ZipFile.OpenRead(Archive)) {
-            foreach (var entry in archive.Entries) {
-              Log.LogMessage(MessageImportance.High, $"  {entry}");
-              entries.Add(new TaskItem(entry.FullName));
-            }
-          }
-          Entries = entries.ToArray();
-        ]]>
-      </Code>
-    </Task>
-  </UsingTask>
 </Project>
