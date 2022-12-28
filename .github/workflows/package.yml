@@ -13,6 +13,12 @@ jobs:
     env:
       DOTNET_NOLOGO: true
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@607fce577a46308457984d59e4954e075820f10a # tag=v3
+        with:
+          dotnet-version: '6.x'
       - name: Create Package
         id: pack
         run: >-
