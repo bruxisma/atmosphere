@@ -12,8 +12,7 @@
     <RepositoryType>git</RepositoryType>
     <Authors>Isabella Muerte</Authors>
     <VersionPrefix>0.3.0</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
-    <Version>$(VersionPrefix)-$(VersionSuffix)</Version>
+    <Version Condition="'$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.PowerShell.SDK" PrivateAssets="All" />

@@ -1,0 +1,30 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+publish:
+  name: Publish Module
+  runs-on: ubuntu-latest
+  environment: release
+  env:
+    DOTNET_NOLOGO: true
+  steps:
+    - name: Checkout Repository
+      uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@607fce577a46308457984d59e4954e075820f10a # tag=v3
+      with:
+        dotnet-version: '6.x'
+    - name: Build Package
+      id: pack
+      run: dotnet pack --nologo --configuration release
+    - name: Publish Package
+      run: >-
+        dotnet nuget push --nologo
+        --force-english-output
+        --skip-duplicate --api-key ${{secrets.POWERSHELL_GALLERY_TOKEN}}
+        --source https://www.powershellgallery.com
+        --timeout 60
+        ${{ steps.pack.outputs.package-filepath }}
+
+

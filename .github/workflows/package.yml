@@ -2,7 +2,6 @@ name: Package
 on:
   push:
     branches: [main]
-    tags: [v*]
 jobs:
   build:
     strategy:
@@ -14,36 +13,15 @@ jobs:
     env:
       DOTNET_NOLOGO: true
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@607fce577a46308457984d59e4954e075820f10a # tag=v3
-        with:
-          dotnet-version: ${{ matrix.version }}
-      - name: Install Dependencies
-        run: dotnet restore
-      - name: Build Project
-        run: dotnet build --configuration ${{ matrix.cfg }}
       - name: Create Package
         id: pack
         run: >-
           dotnet pack --nologo
-          --no-build
           --configuration ${{ matrix.cfg }}
           --version-suffix ${{ github.sha }}
       - name: Upload Package Artifact
         if: github.ref_type == 'branch'
         uses: actions/upload-artifact@83fd05a356d7e2593de66fc9913b3002723633cb # v3
         with:
-          name: ${{matrix.os}}-${{steps.pack.outputs.package-filename}}
+          name: ${{matrix.os}}-${{matrix.cfg}}-${{steps.pack.outputs.package-filename}}
           path: ${{steps.pack.outputs.package-filepath}}
-      - name: Publish Package
-        if: matrix.cfg == 'release' && github.ref_type == 'tag'
-        run: >-
-          dotnet nuget push --nologo
-          --force-english-output
-          --skip-duplicate
-          --api-key ${{secrets.PWSH_TOKEN}}
-          --source https://www.powershellgallery.com
-          --timeout 60
-          ${{steps.pack.outputs.package-filepath}}
