@@ -21,7 +21,7 @@ jobs:
         run: dotnet pack --nologo --configuration release
       - name: Publish Package
         run: >-
-          dotnet nuget push --nologo
+          dotnet nuget push
           --force-english-output
           --skip-duplicate --api-key ${{secrets.POWERSHELL_GALLERY_TOKEN}}
           --source https://www.powershellgallery.com
