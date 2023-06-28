@@ -3,7 +3,7 @@
     <MicrosoftBuildPackageVersion>16.11.0</MicrosoftBuildPackageVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.PowerShell.SDK" Version="7.2.11" Pin="true"/>
+    <PackageVersion Include="Microsoft.PowerShell.SDK" Version="7.2.12" Pin="true"/>
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.6.3" developmentDependency="true" />
     <PackageVersion Include="GitHubActionsTestLogger" Version="2.3.2" developmentDependency="true" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" developmentDependency="true" />
