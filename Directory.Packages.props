@@ -10,7 +10,7 @@
     <PackageVersion Include="codecov.msbuild" Version="1.13.0" developmentDependency="true" />
     <PackageVersion Include="coverlet.collector" Version="6.0.0" developmentDependency="true" />
     <PackageVersion Include="coverlet.msbuild" Version="6.0.0" developmentDependency="true" />
-    <PackageVersion Include="xunit" Version="2.6.1" developmentDependency="true" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.3" developmentDependency="true" />
+    <PackageVersion Include="xunit" Version="2.6.3" developmentDependency="true" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.5" developmentDependency="true" />
   </ItemGroup>
 </Project>
