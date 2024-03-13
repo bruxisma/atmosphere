@@ -8,8 +8,8 @@
     <PackageVersion Include="GitHubActionsTestLogger" Version="2.3.3" developmentDependency="true" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" developmentDependency="true" />
     <PackageVersion Include="codecov.msbuild" Version="1.13.0" developmentDependency="true" />
-    <PackageVersion Include="coverlet.collector" Version="6.0.1" developmentDependency="true" />
-    <PackageVersion Include="coverlet.msbuild" Version="6.0.1" developmentDependency="true" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.2" developmentDependency="true" />
+    <PackageVersion Include="coverlet.msbuild" Version="6.0.2" developmentDependency="true" />
     <PackageVersion Include="xunit" Version="2.7.0" developmentDependency="true" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7" developmentDependency="true" />
   </ItemGroup>
