@@ -37,6 +37,7 @@ jobs:
         dotnet test --nologo --no-restore
         --configuration ${{ matrix.cfg }}
         --logger GitHubActions
+        --property:CoverletOutput=${{github.workspace}}/coverage.opencover.xml
     - name: Upload Coverage
       uses: codecov/codecov-action@v4
       with:

@@ -7,7 +7,6 @@
     <IsPackable>false</IsPackable>
     <Exclude>[System.Text.Encodings.Web]*</Exclude>
     <RunSettingsFilePath>$(MSBuildProjectDirectory)\xunit.runsettings</RunSettingsFilePath>
-    <CoverletOutput>$(SolutionDir)</CoverletOutput>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
