@@ -6,6 +6,9 @@ on:
     branches: [main]
 jobs:
   build:
+    permissions:
+      id-token: write
+      checks: read
     strategy:
       matrix:
         cfg: [Release, Debug]
@@ -37,3 +40,9 @@ jobs:
         dotnet test --nologo --no-restore
         --configuration ${{ matrix.cfg }}
         --logger GitHubActions
+        --property:CoverletOutput=${{github.workspace}}/coverage.opencover.xml
+    - name: Upload Coverage
+      uses: codecov/codecov-action@v4
+      with:
+        files: ${{github.workspace}}/coverage.opencover.xml
+        use_oidc: true
