@@ -8,7 +8,7 @@ jobs:
   build:
     permissions:
       id-token: write
-      check: read
+      checks: read
     strategy:
       matrix:
         cfg: [Release, Debug]
