@@ -6,6 +6,9 @@ on:
     branches: [main]
 jobs:
   build:
+    permissions:
+      id-token: write
+      check: read
     strategy:
       matrix:
         cfg: [Release, Debug]
