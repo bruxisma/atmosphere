@@ -27,7 +27,7 @@ jobs:
           --version-suffix ${{ github.sha }}
       - name: Upload Package Artifact
         if: github.ref_type == 'branch'
-        uses: actions/upload-artifact@604373da6381bf24206979c74d06a550515601b9 # v4
+        uses: actions/upload-artifact@84480863f228bb9747b473957fcc9e309aa96097 # v4
         with:
           name: ${{matrix.os}}-${{matrix.cfg}}-${{steps.pack.outputs.package-filename}}
           path: ${{steps.pack.outputs.package-filepath}}
