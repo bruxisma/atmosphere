@@ -8,7 +8,7 @@ jobs:
       matrix:
         cfg: [debug, release]
         os: [ubuntu, macos, windows]
-        version: ['6.x']
+        version: ['8.x']
     runs-on: ${{ matrix.os }}-latest
     env:
       DOTNET_NOLOGO: true
@@ -18,7 +18,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
-          dotnet-version: '6.x'
+          dotnet-version: ${{ matrix.version }}
       - name: Create Package
         id: pack
         run: >-

@@ -13,7 +13,7 @@ jobs:
       matrix:
         cfg: [Release, Debug]
         os: [ubuntu, macos, windows]
-        version: ['6.x']
+        version: ['8.x']
     runs-on: ${{ matrix.os }}-latest
     env:
       DOTNET_NOLOGO: true
