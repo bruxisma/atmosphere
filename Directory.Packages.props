@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.PowerShell.SDK" Version="7.4.10" Pin="true"/>
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.0" developmentDependency="true" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" developmentDependency="true" />
     <PackageVersion Include="GitHubActionsTestLogger" Version="2.4.1" developmentDependency="true" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" developmentDependency="true" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" developmentDependency="true" />
